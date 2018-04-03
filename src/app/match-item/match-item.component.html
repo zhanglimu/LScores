@@ -1,0 +1,78 @@
+<div class="match-item {{match.contingency ? 'contingency' : ''}}">
+  <i class="follow iconfont {{match.follow ? 'icon-redshoucang red' : 'icon-shoucang'}}" (click)="follow()"></i>
+  <div class="item-header" (click)="clickItem()">
+    <div class="league-name">{{match.leagueName}}</div>
+    <div class="league-no">{{match.matchCode}}</div>
+    <div style="flex: 1"></div>
+    <div class="league-status {{this.match.liveMatchTime === '中' ? 'yellow' : ''}} {{(this.match.contingency ||
+      this.match.liveMatchTime === '中断' ||
+      this.match.liveMatchTime === '腰斩' ||
+      this.match.liveMatchTime === '待定' ||
+      this.match.liveMatchTime === '取消' ||
+      this.match.liveMatchTime === '推迟') ? 'red' : ''}}">{{match.liveMatchTime}}<span class="min-dot"
+                                                                                      *ngIf="isNumber(match.liveMatchTime)">′</span>
+    </div>
+    <div class="league-time" *ngIf="!showFullTime">{{match.matchDate.split(' ')[1].substring(0, 5)}}</div>
+    <div style="margin-right: 30px;" *ngIf="showFullTime">{{match.matchDate.substring(5, 16)}}</div>
+  </div>
+  <div class="item-content" (click)="clickItem()">
+    <div class="info-left">
+      <i class="iconfont icon-jinqiu" *ngIf="match.events && match.events.indexOf(0) !== -1"></i>
+      <img class="goal-disallowed-icon" src="http://github-15645708.gitee.io/wx-caiex/dist/assets/wuxiao.png"
+           *ngIf="match.events && match.events.indexOf(1) !== -1"/>
+      <div style="flex: 1"></div>
+      <div class="card">
+        <div class="red-card" style="margin-right: 4px" *ngIf="match.homeRedCard && match.homeRedCard > 0">{{match.homeRedCard}}</div>
+        <div class="yellow-card" *ngIf="match.homeYellowCard && match.homeYellowCard > 0">{{match.homeYellowCard}}</div>
+      </div>
+    </div>
+    <div class="team {{match.events && match.events.indexOf(0) !== -1 ? 'active':''}}" style="text-align: right">
+      {{match.homeName}}
+    </div>
+    <div class="score-total">
+      <span *ngIf="match.matchState !== '未开赛'">{{match.homeScore}}</span>
+      <span *ngIf="match.matchState !== '未开赛'">-</span>
+      <span *ngIf="match.matchState !== '未开赛'">{{match.awayScore}}</span>
+    </div>
+    <div class="team {{match.events && match.events.indexOf(2) !== -1 ? 'active':''}}" style="text-align: left">
+      {{match.awayName}}
+    </div>
+    <div class="info-right">
+      <i class="iconfont icon-jinqiu" *ngIf="match.events && match.events.indexOf(2) !== -1"></i>
+      <img class="goal-disallowed-icon" src="http://github-15645708.gitee.io/wx-caiex/dist/assets/wuxiao.png"
+           *ngIf="match.events && match.events.indexOf(3) !== -1"/>
+      <div style="flex: 1"></div>
+      <div class="card">
+        <div class="yellow-card" *ngIf="match.awayYellowCard && match.awayYellowCard > 0">{{match.awayYellowCard}}</div>
+        <div class="red-card" *ngIf="match.awayRedCard && match.awayRedCard > 0">{{match.awayRedCard}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="item-content" style="line-height: 18px;padding-top: 2px;padding-bottom: 6px" (click)="clickItem()">
+    <div class="concede">
+      <img style="margin-left: 5px" class="goal-disallowed-text"
+           src="http://github-15645708.gitee.io/wx-caiex/dist/assets/rengzheng.png"
+           *ngIf="((match.events && match.events.indexOf(1) !== -1) || match.scoreState === 1 || match.scoreState === 3) && showCaiEx"/>
+      <span style="text-align: right">({{match.hhadHandcap}})</span>
+    </div>
+    <div class="score-half">
+      <span *ngIf="match.matchState !== '未开赛'">{{match.homeScoreHalf}} - {{match.awayScoreHalf}}</span>
+    </div>
+    <div class="concede">
+      <img class="half-court" src="http://github-15645708.gitee.io/wx-caiex/dist/assets/half.png"
+           *ngIf="match.matchState !== '未开赛'">
+      <span></span>
+      <img style="margin-right: 5px" class="goal-disallowed-text"
+           src="http://github-15645708.gitee.io/wx-caiex/dist/assets/rengzheng.png"
+           *ngIf="((match.events && match.events.indexOf(3) !== -1) || match.scoreState === 2 || match.scoreState === 3) && showCaiEx"/>
+    </div>
+  </div>
+  <div class="item-footer" (click)="clickItem()">
+    <span class="live-status-{{match.hadstate}}">{{match.hadstate | stateTransform}}</span>
+    <span class="live-status-{{match.hhadstate}}">{{match.hhadstate | stateTransform}}</span>
+    <span class="live-status-{{match.hafustate}}">{{match.hafustate | stateTransform}}</span>
+    <span class="live-status-{{match.ttgstate}}">{{match.ttgstate | stateTransform}}</span>
+    <span class="live-status-{{match.crsstate}}">{{match.crsstate | stateTransform}}</span>
+  </div>
+  <div class="vs" *ngIf="match.matchState === '未开赛'"></div>
+</div>

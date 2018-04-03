@@ -1,0 +1,24 @@
+<div class="toast-content">
+  <div class="toast-item" *ngFor="let e of events">
+    <div class="time">
+      {{e.liveMatchTime}}′
+    </div>
+    <div class="event">
+      <div class="goal" *ngIf="e.homeGoal"></div>
+      <div class="redcard" *ngIf="e.homeRedCard"></div>
+    </div>
+    <div class="match-info">
+      <div class="team {{e.homeGoal || e.homeRedCard ? 'active' :''}}" style="text-align: right;">{{e.homeName}}</div>
+      <div class="score-total">
+        <span class="{{e.homeGoal ? 'active' :''}}">{{e.homeScore}}</span>
+        <span>:</span>
+        <span class="{{e.awayGoal ? 'active' :''}}">{{e.awayScore}}</span>
+      </div>
+      <div class="team {{e.awayGoal || e.awayRedCard ? 'active' :''}}">{{e.awayName}}</div>
+    </div>
+    <div class="event">
+      <div class="goal" *ngIf="e.awayGoal"></div>
+      <div class="redcard" *ngIf="e.awayRedCard"></div>
+    </div>
+  </div>
+</div>

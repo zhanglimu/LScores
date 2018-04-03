@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* WeUI style sheet */
+@import '../node_modules/weui/dist/style/weui.css';
+/* WeUI Exmple style sheet */
+@import '../node_modules/weui/dist/example/example.css';
+/* font-awesome.min.css */
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+
+/* 重写样式 */
+.page {
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: scroll;
+  flex-direction: column;
+  background-color: #F5F5F9;
+}
+
+.green{
+  color: #32c07c;
+}
+
+.red{
+  color: #d0021b;
+}
+
+.weui-switch:checked,
+.weui-switch-cp__input:checked ~ .weui-switch-cp__box {
+  border-color: #E44340;
+  background-color: #E44340;
+}

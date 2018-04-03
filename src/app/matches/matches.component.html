@@ -1,0 +1,132 @@
+<div class="page">
+  <div class="header-bar">
+    <div class="header-btn" (click)="gotoLeague()">筛选</div>
+    <div class="segment">
+      <div class="segment-button" [class.selected]="switchIndex === '0'" (click)="switch('0')">进行中</div>
+      <div class="segment-button" [class.selected]="switchIndex === '1'" (click)="switch('1')">未开始</div>
+      <div class="segment-button" [class.selected]="switchIndex === '2'" (click)="switch('2')">已结束</div>
+      <div class="segment-button" [class.selected]="switchIndex === '3'" (click)="switch('3')">关注</div>
+    </div>
+    <div class="header-btn" (click)="isShowDialog = true">提示</div>
+  </div>
+  <div class="status-bar">
+    <span>胜平负</span>
+    <span>让球胜平负</span>
+    <span>半全场</span>
+    <span>总进球</span>
+    <span>比分</span>
+  </div>
+  <div class="container" #content [ngSwitch]="switchIndex">
+    <div class="{{applyMinHeight(content, ad, matchInPlayTotal) ? 'list': ''}}" *ngSwitchCase="0">
+      <ng-container *ngFor="let matchGroup of matchGroupInPlay">
+        <div class="group-title" #title (click)="expandGroup(matchGroup)" *ngIf="matchGroup.matchDate">
+          <div>{{matchGroup.matchDate | dateAppendWeek}}</div>
+          <div>共{{matchGroup.matches.length}}场</div>
+          <i class="iconfont {{matchGroup.isExpanded ? 'icon-jiantouxia' : 'icon-jiantouyou'}}"></i>
+        </div>
+        <ng-container *ngIf="matchGroup.isExpanded">
+          <app-match-item *ngFor="let match of matchGroup.matches" [match]="match" [showFullTime]=true [showCaiEx]=true
+                          (onFollow)="onFollow($event)" (onClick)="gotoDetail(match)"></app-match-item>
+        </ng-container>
+      </ng-container>
+      <div class="no-data" *ngIf="matchGroupInPlay.length === 0 && !isShowLoading">
+        <i class="iconfont icon-zanwuhuodong"></i>
+        目前还没有进行中的赛事
+      </div>
+    </div>
+    <div class="{{applyMinHeight(content, ad, matchNotBeginTotal) ? 'list': ''}}" *ngSwitchCase="1">
+      <ng-container *ngFor="let matchGroup of matchGroupNotBegin">
+        <div class="group-title" (click)="expandGroup(matchGroup)" *ngIf="matchGroup.matchDate">
+          <div>{{matchGroup.matchDate | dateAppendWeek}}</div>
+          <div>共{{matchGroup.matches.length}}场</div>
+          <i class="iconfont {{matchGroup.isExpanded ? 'icon-jiantouxia' : 'icon-jiantouyou'}}"></i>
+        </div>
+        <ng-container *ngIf="matchGroup.isExpanded">
+          <app-match-item *ngFor="let match of matchGroup.matches" [match]="match" [showFullTime]=true
+                          (onFollow)="onFollow($event)" (onClick)="gotoDetail(match)"></app-match-item>
+        </ng-container>
+      </ng-container>
+      <div class="no-data" *ngIf="matchGroupNotBegin.length === 0 && !isShowLoading">
+        <i class="iconfont icon-zanwuhuodong"></i>
+        目前还没有未开始的赛事
+      </div>
+    </div>
+    <div class="{{applyMinHeight(content, ad, matchOverTotal) ? 'list': ''}}" *ngSwitchCase="2">
+      <ng-container *ngFor="let matchGroup of matchGroupOver">
+        <div class="group-title" (click)="expandGroup(matchGroup)" *ngIf="matchGroup.matchDate">
+          <div>{{matchGroup.matchDate | dateAppendWeek}}</div>
+          <div>共{{matchGroup.matches.length}}场</div>
+          <i class="iconfont {{matchGroup.isExpanded ? 'icon-jiantouxia' : 'icon-jiantouyou'}}"></i>
+        </div>
+        <ng-container *ngIf="matchGroup.isExpanded">
+          <app-match-item *ngFor="let match of matchGroup.matches" [match]="match" [showFullTime]=true
+                          (onFollow)="onFollow($event)" (onClick)="gotoDetail(match)"></app-match-item>
+        </ng-container>
+      </ng-container>
+      <div class="no-data" *ngIf="matchGroupOver.length === 0 && !isShowLoading">
+        <i class="iconfont icon-zanwuhuodong"></i>
+        目前还没有已完赛的赛事
+      </div>
+    </div>
+    <div class="{{applyMinHeight(content, ad, matchesFollow.length) ? 'list': ''}}" *ngSwitchCase="3">
+      <ng-container>
+        <app-match-item *ngFor="let match of matchesFollow" [match]="match" [showFullTime]=true
+                        (onFollow)="onFollow($event)" (onClick)="gotoDetail(match)"></app-match-item>
+      </ng-container>
+      <div class="no-data" *ngIf="matchesFollow.length === 0 && !isShowLoading">
+        <i class="iconfont icon-zanwuhuodong"></i>
+        目前还没有关注的赛事
+      </div>
+    </div>
+    <img #ad src="http://github-15645708.gitee.io/wx-caiex/dist/assets/ad.png" style="width: 100%;">
+    <div class="ad-title">
+      Caiex携手多方购彩平台，为您打造全新购彩体验！
+    </div>
+    <div class="ad-platform">
+      <div class="p-item"></div>
+      <a class="p-item" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.woqutz.didi">
+        <img src="http://github-15645708.gitee.io/wx-caiex/dist/assets/woqu.png"/>
+        <div>我去彩票站</div>
+      </a>
+      <a class="p-item" href="http://a.app.qq.com/o/simple.jsp?pkgname=caimi.app.android.lottery">
+        <img src="http://github-15645708.gitee.io/wx-caiex/dist/assets/lemi.png"/>
+        <div>乐米彩票</div>
+      </a>
+      <a class="p-item" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.houcai.letoula">
+        <img src="http://github-15645708.gitee.io/wx-caiex/dist/assets/letoula.png"/>
+        <div>乐透啦</div>
+      </a>
+      <a class="p-item" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.cai159.lottery">
+        <img src="http://github-15645708.gitee.io/wx-caiex/dist/assets/159.png"/>
+        <div>159彩票</div>
+      </a>
+      <div class="p-item">
+        <img src="http://github-15645708.gitee.io/wx-caiex/dist/assets/qidai.png"/>
+        <div>敬请期待</div>
+      </div>
+      <div class="p-item"></div>
+    </div>
+    <div class="ad-declare">
+      特别提醒：以上比分数据仅供参考，最终结果以“赛果开奖”公布内容为准。“彩易科思”在法律允许的范围内有解释权。
+    </div>
+  </div>
+  <div class="tips-dialog" *ngIf="isShowDialog">
+    <div class="weui-dialog">
+      <div class="weui-dialog__hd"><strong class="weui-dialog__title">提示</strong></div>
+      <div class="weui-dialog__bd" style="text-align: left;line-height: 1.5;max-height: 250px;overflow: scroll">
+        开售：caiex提供询价与交易服务<br/>
+        停售：由于风险控制原因，caiex暂时停止交易服务，稍后可尝试发起交易<br/>
+        关盘：caiex对该场比赛提供的即场交易服务已经停止，此时不可发起交易<br/>
+        完场：赛果已出，中奖的用户可以进行交易<br/>
+        取消：由于某些客观因素，该场比赛被取消，用户可以发起交易<br/>
+        -：该场比赛不在caiex系统当中或该玩法竞彩未开售，暂时无法交易<br/>
+      </div>
+      <div class="weui-dialog__ft">
+        <a (click)="isShowDialog = false" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+      </div>
+    </div>
+  </div>
+  <app-toast *ngIf="switchIndex === '0' && events.length > 0" [events]="events"></app-toast>
+  <weui-toast *ngIf="isShowLoading" status="loading"></weui-toast>
+  <weui-toast *ngIf="isShowToast" status="success" content="{{toastContent}}"></weui-toast>
+</div>

@@ -1,0 +1,40 @@
+<div class="page">
+  <div class="header-bar">
+    <div class="info">
+      <div class="box">
+        <div class="label">{{match.leagueName}}</div>
+        <div class="label">比赛编号 {{match.matchCode}}</div>
+      </div>
+      <img class="logo" src="http://github-15645708.gitee.io/wx-caiex/dist/assets/caiex.png">
+      <div class="box">
+        <div class="label">{{match.matchDate.split(' ')[0] | dateAppendWeek}}</div>
+        <div class="label">
+          <!-- <span style="margin-right: 10px">{{match.matchDate.split(' ')[1].substring(0, 5)}} 开赛</span> -->
+          <span style="margin-right: 10px">{{match.liveMatchTime}}</span>
+          <i class="iconfont {{match.follow ? 'icon-redshoucang red' : 'icon-shoucang'}}"></i>
+        </div>
+      </div>
+    </div>
+    <div class="match">
+      <div class="name">{{match.homeName}}</div>
+      <div class="vs">VS</div>
+      <div class="name">{{match.awayName}}</div>
+    </div>
+  </div>
+  <div class="sub-bar">
+    <span>时间发生时间</span>
+    <span>关键事件</span>
+    <span>玩法名称</span>
+  </div>
+  <div class="container" style="display: block">
+    <div class="list-item" *ngFor="let item of logs">
+      <span>{{item.logDate}}</span>
+      <span class="{{item.matchPool ? '' : 'flex-auto'}}">{{item.event}}</span>
+      <span *ngIf="poolsZH[item.matchPool]">{{poolsZH[item.matchPool]}}</span>
+    </div>
+  </div>
+  <div class="footer">
+    注意：由于某种不特定因素以上比分记录可能出现异常情况，一切比分变化以竞彩官网公布为准。
+  </div>
+  <weui-toast *ngIf="isShowLoading" status="loading"></weui-toast>
+</div>

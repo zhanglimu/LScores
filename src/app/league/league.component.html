@@ -1,0 +1,26 @@
+<div class="page">
+  <!--<div class="item-switch">-->
+  <!--<weui-switch [(ngModel)]="toggleValue" value="toggleValue" (click)="onSwitch()">-->
+  <!--<label>选择全部赛事</label>-->
+  <!--</weui-switch>-->
+  <!--</div>-->
+  <div class="item-switch" (click)="onSwitch()">
+    <span>选择全部赛事</span>
+    <i class="weui-icon-success" [class.active]="selectedAll"></i>
+  </div>
+  <div class="container">
+    <ng-container *ngFor="let lg of lgList">
+      <div class="title">{{lg.name}}</div>
+      <div class="row">
+        <div class="col-3 item" *ngFor="let item of lg.leagues" [class.selected]="item.selected"
+             (click)="onSelect(item)">
+          {{item.name}}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="footer">
+    <div class="cancel-btn" (click)="cancel()">取消</div>
+    <div class="confirm-btn {{leagues.length === 0 ? 'disable':''}}" (click)="confirm()">确认</div>
+  </div>
+</div>

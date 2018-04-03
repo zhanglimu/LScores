@@ -1,0 +1,83 @@
+.toast-content {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  .toast-item {
+    position: relative;
+    height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.68);
+    display: flex;
+    align-items: center;
+    .event {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      .goal{
+        background-image: url("http://github-15645708.gitee.io/wx-caiex/dist/assets/goal.png");
+        height: 28px;
+        width: 30px;
+        background-size: cover;
+      }
+      .redcard{
+        height: 28px;
+        width: 20px;
+        background-color: #d0021b;
+        border-radius: 3px;
+        color: #FFF;
+        font-size: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:before{
+          content: '红牌';
+        }
+      }
+    }
+    .match-info {
+      flex: 1;
+      display: flex;
+      margin-top: 10px;
+      .team {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 16px;
+        color: #FFF;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+      .score-total {
+        width: 50px;
+        color: #FFF;
+        font-size: 16px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+    }
+    .time {
+      position: absolute;
+      width: 80px;
+      text-align: center;
+      top: 8px;
+      left: 50%;
+      margin-left: -40px;
+      font-size: 13px;
+      color: #FFF;
+      font-weight: normal;
+    }
+  }
+  .active {
+    font-weight: bold;
+    color: rgb(255, 253, 24) !important;
+  }
+}

@@ -1,0 +1,251 @@
+.match-item {
+  &.contingency {
+    .item-header {
+      background-color: rgba(255, 253, 24, 0.2);
+    }
+    .item-content {
+      background-color: rgba(255, 253, 24, 0.2);
+    }
+    .item-footer {
+      background-color: rgba(255, 253, 24, 0.2);
+    }
+  }
+
+  .yellow {
+    color: orange;
+  }
+
+  position: relative;
+  border-bottom: 1px solid #CCC;
+  .follow {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 8px;
+    font-size: 16px;
+    z-index: 9;
+  }
+  .item-header {
+    padding: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    background-color: #FFF;
+    color: #5d5d5d;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .league-name {
+      flex: 1;
+    }
+    .league-no {
+      flex: 1;
+    }
+    .league-status {
+      text-align: center;
+      position: absolute;
+      width: 80px;
+      margin-left: -40px;
+      left: 50%;
+    }
+    .league-time {
+      flex: 1;
+      text-align: right;
+      margin-right: 30px;
+    }
+  }
+  .item-content {
+    background-color: #FFF;
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    line-height: 20px;
+    justify-content: center;
+    align-items: center;
+    .info-left {
+      width: 60px;
+      margin-left: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .info-right {
+      width: 60px;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .team {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      &.active {
+        color: #d0021b;
+        font-weight: bold;
+      }
+    }
+    .score-total {
+      width: 50px;
+      margin-left: 8px;
+      margin-right: 8px;
+      color: #d0021b;
+      font-weight: bold;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .score-half {
+      width: 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+    .half-tip {
+      font-size: 10px;
+      width: 14px;
+      height: 14px;
+      line-height: 14px;
+      text-align: center;
+      background-color: #888888;
+      border-radius: 2px;
+      color: #FFF;
+    }
+    .concede {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      .half-court {
+        width: 12px;
+        height: 12px;
+      }
+      span {
+        flex: 1;
+      }
+    }
+  }
+  .item-footer {
+    background-color: #f5f5f5;
+    font-size: 12px;
+    padding: 0px 8px;
+    display: flex;
+    text-align: center;
+    span {
+      flex: 1;
+      line-height: 22px;
+    }
+  }
+}
+
+.goal-disallowed-icon {
+  height: 18px;
+  width: 18px;
+  animation: zoom 800ms infinite linear
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .red-card {
+    background-color: #d0021b;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 10px;
+    padding: 4px 3px;
+    color: #FFF;
+    border-radius: 2px;
+    margin-left: 4px;
+  }
+  .yellow-card {
+    background-color: #ffdd00;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 10px;
+    padding: 4px 3px;
+    color: #FFF;
+    border-radius: 2px;
+  }
+}
+
+.live-status-1, .live-status-4, .live-status-5 {
+  color: #32c07c;
+}
+
+.live-status-2, .live-status-3 {
+  color: #d0021b;
+}
+
+.vs {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  background-color: #d7d7d7;
+  color: #fff;
+  border-radius: 12px;
+  left: 50%;
+  margin-left: -12px;
+  bottom: 36px;
+  &:before {
+    content: 'VS';
+  }
+}
+
+.icon-jinqiu {
+  font-size: 20px;
+  animation: spin 1000ms 10 linear, shine 500ms linear 9500ms 1 forwards;
+}
+
+.min-dot {
+  animation: shine 1000ms infinite linear
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.goal-disallowed-text {
+  width: 30px;
+}
+
+@media screen and (max-width: 320px) {
+  .match-item .item-content .team {
+    font-size: 13px;
+  }
+}
