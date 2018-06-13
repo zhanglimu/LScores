@@ -31,7 +31,7 @@ export class Match {
               public events: Event[]  //比赛事件
   ) {
   }
-}
+} 
 
 export enum Event {
   HomeGoal, // 主队进球

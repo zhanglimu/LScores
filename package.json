@@ -23,6 +23,7 @@
     "@angular/router": "^4.4.4",
     "angular4-weui": "1.0.14",
     "core-js": "^2.4.1",
+    "element-angular": "^0.7.6",
     "font-awesome": "^4.7.0",
     "node-sass": "^4.7.2",
     "rxjs": "^5.0.1",

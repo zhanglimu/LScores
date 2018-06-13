@@ -1,18 +1,17 @@
-/**
- * Created by gaofeng on 2017/11/27.
- */
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {LeagueComponent} from "./league/league.component";
 import {MatchesComponent} from "./matches/matches.component";
 import {MatchDetailComponent} from "./match-detail/match-detail.component";
+import {CalculatorComponent} from './calculator/calculator.component';
 
 const appRoutes: Routes = [
   {path: 'leagues', component: LeagueComponent},
   {path: 'matches', component: MatchesComponent},
   {path: 'match-detail', component: MatchDetailComponent},
-  {path: '', redirectTo: '/matches', pathMatch: 'full'},
-  {path: '**', component: MatchesComponent}
+  {path: 'calculator', component: CalculatorComponent},
+  {path: '', redirectTo: '/calculator', pathMatch: 'full'},
+  {path: '**', component: CalculatorComponent}
 ];
 
 @NgModule({

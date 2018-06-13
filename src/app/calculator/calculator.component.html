@@ -1,0 +1,147 @@
+<!-- <div class="header-bar">
+    <div class="segment">
+        <div class="segment-button" [class.selected]="switchIndex === '0'" (click)="switch('0')">单关</div>
+        <div class="segment-button" [class.selected]="switchIndex === '1'" (click)="switch('1')">串关</div>
+    </div>
+</div> -->
+<div>
+    <el-collapse [model]="[1]" [accordion]="true">
+        <el-collapse-item label="已结束" value="1">
+        <!-- <div>06-08周六</div> -->
+        <div>
+            <dd id="invisible" *ngFor="let clo of close">
+                <ul style="height:120px;">
+                    <li class="clearfix">
+                        <div class="events" style="height:120px;">
+                            <span>{{clo.league}}</span>
+                            <b>{{clo.matchCode}}</b>
+                            <i>{{clo.matchDate.substring(5,10)}}</i>
+                        </div>
+                        <div class="events_list">
+                            <div class="eventsvs">
+                                <div class="ab">{{clo.homeTeam}}</div>
+                                <div class="ac">VS</div>
+                                <div class="ad">{{clo.awayTeam}}</div>
+                            </div>
+                            <div class="eventsnum" *ngIf="closeA">
+                                <span class="zhuwin">胜<i>{{closeA.H}}</i></span>
+                                <span class="eventp">平<i>{{closeA.A}}</i></span>
+                                <span class="kewin">负<i>{{closeA.X}}</i></span>
+                            </div>
+                            <div class="eventsnum" *ngIf="closeD">
+                                <span class="zhuwin">{{clo.handcapline}}胜<i>{{closeD.H}}</i></span>
+                                <span class="eventp">{{clo.handcapline}}平<i>{{closeD.A}}</i></span>
+                                <span class="kewin">{{clo.handcapline}}负<i>{{closeD.X}}</i></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>	
+            </dd>
+          </div>
+        </el-collapse-item>
+        <el-collapse-item label="进行中" value="2">
+            <!-- <div>06-08周六</div> -->
+            <div>
+              <dd id="invisible" *ngFor="let in of inplay">
+                  <ul style="height:120px;">
+                      <li class="clearfix">
+                          <div class="events" style="height:120px;">
+                              <span>{{in.league}}</span>
+                              <b>{{in.matchCode}}</b>
+                              <i>{{in.matchDate.substring(5,10)}}</i>
+                          </div>
+                          <div class="events_list">
+                              <div class="eventsvs">
+                                  <div class="ab">{{in.homeTeam}}</div>
+                                  <div class="ac">VS</div>
+                                  <div class="ad">{{in.awayTeam}}</div>
+                              </div>
+                              <div class="eventsnum" *ngIf="inplayA">
+                                  <span class="zhuwin">胜<i>{{inplayA.H}}</i></span>
+                                  <span class="eventp">平<i>{{inplayA.A}}</i></span>
+                                  <span class="kewin">负<i>{{inplayA.X}}</i></span>
+                              </div>
+                              <div class="eventsnum" *ngIf="inplayD">
+                                  <span class="zhuwin">{{in.handcapline}}胜<i>{{inplayD.H}}</i></span>
+                                  <span class="eventp">{{in.handcapline}}平<i>{{inplayD.A}}</i></span>
+                                  <span class="kewin">{{in.handcapline}}负<i>{{inplayD.X}}</i></span>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>	
+              </dd>
+            </div>
+        </el-collapse-item>
+        <el-collapse-item label="未开始" value="3">
+            <!-- <div>06-08周六</div> -->
+            <div>
+                <dd id="invisible" *ngFor="let pre of prematch">
+                    <ul style="height:120px;">
+                        <li class="clearfix">
+                            <div class="events" style="height:120px;">
+                                <span>{{pre.league}}</span>
+                                <b>{{pre.matchCode}}</b>
+                                <i>{{pre.matchDate.substring(5,10)}}</i>
+                            </div>
+                            <div class="events_list">
+                                <div class="eventsvs">
+                                    <div class="ab">{{pre.homeTeam}}</div>
+                                    <div class="ac">VS</div>
+                                    <div class="ad">{{pre.awayTeam}}</div>
+                                </div>
+                                <div class="eventsnum" *ngIf="prematchA">
+                                    <span class="zhuwin">胜<i>{{prematchA.H}}</i></span>
+                                    <span class="eventp">平<i>{{prematchA.A}}</i></span>
+                                    <span class="kewin">负<i>{{prematchA.X}}</i></span>
+                                </div>
+                                <div class="eventsnum" *ngIf="prematchD">
+                                    <span class="zhuwin">{{pre.handcapline}}胜<i>{{prematchD.H}}</i></span>
+                                    <span class="eventp">{{pre.handcapline}}平<i>{{prematchD.A}}</i></span>
+                                    <span class="kewin">{{pre.handcapline}}负<i>{{prematchD.X}}</i></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>	
+                </dd>
+              </div>
+        </el-collapse-item>
+        <el-collapse-item label="异常" value="4">
+            <!-- <div>06-08周六</div> -->
+            <div>
+              <dd id="invisible" *ngFor="let exc of exception">
+                  <ul style="height:120px;">
+                      <li class="clearfix">
+                          <div class="events" style="height:120px;">
+                              <span>{{exc.league}}</span>
+                              <b>{{exc.matchCode}}</b>
+                              <i>{{exc.matchDate.substring(5,10)}}</i>
+                          </div>
+                          <div class="events_list">
+                              <div class="eventsvs">
+                                  <div class="ab">{{exc.homeTeam}}</div>
+                                  <div class="ac">VS</div>
+                                  <div class="ad">{{exc.awayTeam}}</div>
+                              </div>
+                              <div class="eventsnum" *ngIf="exceptionA">
+                                  <span class="zhuwin">胜<i>{{exceptionA.H}}</i></span>
+                                  <span class="eventp">平<i>{{exceptionA.A}}</i></span>
+                                  <span class="kewin">负<i>{{exceptionA.X}}</i></span>
+                              </div>
+                              <div class="eventsnum" *ngIf="exceptionD">
+                                  <span class="zhuwin">{{exc.handcapline}}胜<i>{{exceptionD.H}}</i></span>
+                                  <span class="eventp">{{exc.handcapline}}平<i>{{exceptionD.A}}</i></span>
+                                  <span class="kewin">{{exc.handcapline}}负<i>{{exceptionD.X}}</i></span>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>	
+              </dd>
+            </div>
+        </el-collapse-item>
+      </el-collapse>
+</div>
+<!-- <div id="footer">
+    <i class="fa fa-calculator fa-2x" aria-hidden="true"></i>
+    <span>单关计算机只支持查看单场单选玩法</span><br>
+    <span>默认本金：<i>1000</i>元</span>
+</div> -->

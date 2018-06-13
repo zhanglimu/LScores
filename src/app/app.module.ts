@@ -16,7 +16,12 @@ import {MatchService} from './service/match.service';
 
 import {DateAppendWeekPipe} from './pipe/append-week.pipe'
 import {StateTransformPipe} from './pipe/state-transform.pipe';
-import {ToastComponent} from './toast/toast.component'
+import {ToastComponent} from './toast/toast.component';
+
+import { ElModule } from 'element-angular';
+import {CalculatorComponent} from './calculator/calculator.component';
+import {CalcuService} from './service/calculator.service';
+
 
 @NgModule({
   imports: [
@@ -25,7 +30,8 @@ import {ToastComponent} from './toast/toast.component'
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    WeUIModule
+    WeUIModule,
+    ElModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -35,9 +41,10 @@ import {ToastComponent} from './toast/toast.component'
     MatchItemComponent,
     DateAppendWeekPipe,
     StateTransformPipe,
-    ToastComponent
+    ToastComponent,
+    CalculatorComponent
   ],
-  providers: [LeagueService, MatchService],
+  providers: [LeagueService, MatchService,CalcuService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
