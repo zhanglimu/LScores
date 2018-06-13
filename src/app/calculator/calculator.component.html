@@ -23,15 +23,15 @@
                                 <div class="ac">VS</div>
                                 <div class="ad">{{clo.awayTeam}}</div>
                             </div>
-                            <div class="eventsnum" *ngIf="closeA">
-                                <span class="zhuwin">胜<i>{{closeA.H}}</i></span>
-                                <span class="eventp">平<i>{{closeA.A}}</i></span>
-                                <span class="kewin">负<i>{{closeA.X}}</i></span>
+                            <div class="eventsnum" *ngIf="clo.pool.HAD">
+                                <span class="zhuwin" (click)="cl(clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'1')">胜<i>{{clo.pool.HAD.H}}</i></span>
+                                <span class="eventp" (click)="cl(clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'2')">平<i>{{clo.pool.HAD.A}}</i></span>
+                                <span class="kewin" (click)="cl(clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'3')">负<i>{{clo.pool.HAD.X}}</i></span>
                             </div>
-                            <div class="eventsnum" *ngIf="closeD">
-                                <span class="zhuwin">{{clo.handcapline}}胜<i>{{closeD.H}}</i></span>
-                                <span class="eventp">{{clo.handcapline}}平<i>{{closeD.A}}</i></span>
-                                <span class="kewin">{{clo.handcapline}}负<i>{{closeD.X}}</i></span>
+                            <div class="eventsnum" *ngIf="clo.pool.HHAD">
+                                <span class="zhuwin" (click)="cl(clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'4')">{{clo.handcapline}}胜<i>{{clo.pool.HHAD.H}}</i></span>
+                                <span class="eventp" (click)="cl(clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'5')">{{clo.handcapline}}平<i>{{clo.pool.HHAD.A}}</i></span>
+                                <span class="kewin" (click)="cl(clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'6')">{{clo.handcapline}}负<i>{{clo.pool.HHAD.X}}</i></span>
                             </div>
                         </div>
                     </li>
@@ -56,15 +56,15 @@
                                   <div class="ac">VS</div>
                                   <div class="ad">{{in.awayTeam}}</div>
                               </div>
-                              <div class="eventsnum" *ngIf="inplayA">
-                                  <span class="zhuwin">胜<i>{{inplayA.H}}</i></span>
-                                  <span class="eventp">平<i>{{inplayA.A}}</i></span>
-                                  <span class="kewin">负<i>{{inplayA.X}}</i></span>
+                              <div class="eventsnum" *ngIf="in.pool.HAD">
+                                  <span class="zhuwin" (click)="cl(in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'1')">胜<i>{{in.pool.HAD.H}}</i></span>
+                                  <span class="eventp" (click)="cl(in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'2')">平<i>{{in.pool.HAD.A}}</i></span>
+                                  <span class="kewin" (click)="cl(in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'3')">负<i>{{in.pool.HAD.X}}</i></span>
                               </div>
-                              <div class="eventsnum" *ngIf="inplayD">
-                                  <span class="zhuwin">{{in.handcapline}}胜<i>{{inplayD.H}}</i></span>
-                                  <span class="eventp">{{in.handcapline}}平<i>{{inplayD.A}}</i></span>
-                                  <span class="kewin">{{in.handcapline}}负<i>{{inplayD.X}}</i></span>
+                              <div class="eventsnum" *ngIf="in.pool.HHAD">
+                                  <span class="zhuwin" (click)="cl(in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'4')">{{in.handcapline}}胜<i>{{in.pool.HHAD.H}}</i></span>
+                                  <span class="eventp" (click)="cl(in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'5')">{{in.handcapline}}平<i>{{in.pool.HHAD.A}}</i></span>
+                                  <span class="kewin" (click)="cl(in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'6')">{{in.handcapline}}负<i>{{in.pool.HHAD.X}}</i></span>
                               </div>
                           </div>
                       </li>
@@ -89,15 +89,15 @@
                                     <div class="ac">VS</div>
                                     <div class="ad">{{pre.awayTeam}}</div>
                                 </div>
-                                <div class="eventsnum" *ngIf="prematchA">
-                                    <span class="zhuwin">胜<i>{{prematchA.H}}</i></span>
-                                    <span class="eventp">平<i>{{prematchA.A}}</i></span>
-                                    <span class="kewin">负<i>{{prematchA.X}}</i></span>
+                                <div class="eventsnum" *ngIf="pre.pool.HAD">
+                                    <span class="zhuwin" (click)="cl(pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'1')">胜<i>{{pre.pool.HAD.H}}</i></span>
+                                    <span class="eventp" (click)="cl(pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'2')">平<i>{{pre.pool.HAD.A}}</i></span>
+                                    <span class="kewin" (click)="cl(pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'3')">负<i>{{pre.pool.HAD.X}}</i></span>
                                 </div>
-                                <div class="eventsnum" *ngIf="prematchD">
-                                    <span class="zhuwin">{{pre.handcapline}}胜<i>{{prematchD.H}}</i></span>
-                                    <span class="eventp">{{pre.handcapline}}平<i>{{prematchD.A}}</i></span>
-                                    <span class="kewin">{{pre.handcapline}}负<i>{{prematchD.X}}</i></span>
+                                <div class="eventsnum" *ngIf="pre.pool.HHAD">
+                                    <span class="zhuwin" (click)="cl(pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'4')">{{pre.handcapline}}胜<i>{{pre.pool.HHAD.H}}</i></span>
+                                    <span class="eventp" (click)="cl(pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'5')">{{pre.handcapline}}平<i>{{pre.pool.HHAD.A}}</i></span>
+                                    <span class="kewin" (click)="cl(pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'6')">{{pre.handcapline}}负<i>{{pre.pool.HHAD.X}}</i></span>
                                 </div>
                             </div>
                         </li>
@@ -122,15 +122,15 @@
                                   <div class="ac">VS</div>
                                   <div class="ad">{{exc.awayTeam}}</div>
                               </div>
-                              <div class="eventsnum" *ngIf="exceptionA">
-                                  <span class="zhuwin">胜<i>{{exceptionA.H}}</i></span>
-                                  <span class="eventp">平<i>{{exceptionA.A}}</i></span>
-                                  <span class="kewin">负<i>{{exceptionA.X}}</i></span>
+                              <div class="eventsnum" *ngIf="exc.pool.HAD">
+                                  <span class="zhuwin" (click)="cl(exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'1')">胜<i>{{exc.pool.HAD.H}}</i></span>
+                                  <span class="eventp" (click)="cl(exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'2')">平<i>{{exc.pool.HAD.A}}</i></span>
+                                  <span class="kewin" (click)="cl(exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'3')">负<i>{{exc.pool.HAD.X}}</i></span>
                               </div>
-                              <div class="eventsnum" *ngIf="exceptionD">
-                                  <span class="zhuwin">{{exc.handcapline}}胜<i>{{exceptionD.H}}</i></span>
-                                  <span class="eventp">{{exc.handcapline}}平<i>{{exceptionD.A}}</i></span>
-                                  <span class="kewin">{{exc.handcapline}}负<i>{{exceptionD.X}}</i></span>
+                              <div class="eventsnum" *ngIf="exc.pool.HHAD">
+                                  <span class="zhuwin" (click)="cl(exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'4')">{{exc.handcapline}}胜<i>{{exc.pool.HHAD.H}}</i></span>
+                                  <span class="eventp" (click)="cl(exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'5')">{{exc.handcapline}}平<i>{{exc.pool.HHAD.A}}</i></span>
+                                  <span class="kewin" (click)="cl(exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'6')">{{exc.handcapline}}负<i>{{exc.pool.HHAD.X}}</i></span>
                               </div>
                           </div>
                       </li>
@@ -140,8 +140,10 @@
         </el-collapse-item>
       </el-collapse>
 </div>
-<!-- <div id="footer">
-    <i class="fa fa-calculator fa-2x" aria-hidden="true"></i>
+<div id="footer">
+    <!-- <a href="'./assets/reckoner/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10+'&M='+this.info11"> -->
+        <i class="fa fa-calculator fa-2x" aria-hidden="true" (click)="calcu()"></i>
+    <!-- </a> -->
     <span>单关计算机只支持查看单场单选玩法</span><br>
     <span>默认本金：<i>1000</i>元</span>
-</div> -->
+</div>

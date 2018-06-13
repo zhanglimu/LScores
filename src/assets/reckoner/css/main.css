@@ -1,0 +1,84 @@
+@charset "utf-8";
+#top{height: 48px;width: 100%;background: #E32030;}
+.point img {
+float:left;
+width:20px;
+height:20px;
+margin:15px 0 0 20px;
+}
+.point,.tatle{display: inline-block; width: 33.3%;}
+.foot img{width: 18%;}
+/*ticket.html*/
+.echarts{margin-bottom: 10px;}
+.echarts a{color: #E32030;}
+.echartsdiv{background: #fff;}
+.bg{
+  width: 100%;
+  height:200px;
+  background: #ddd;
+  text-align: center;
+}
+.bg h4{
+  padding: 59px 0;
+}
+.bg a{color: #fff;   
+   display: inline-block;
+   line-height: 55px;
+   font-size: 20px;}
+.ppp{
+  width: 100%;
+  height:56px;
+  background: #999;
+}
+.sigerd{
+  width: 100%;
+  margin: 10px 0;
+}
+.nim{width: 100%;padding: 12px;}
+.nim h4{color: #fff;text-align: center;}
+.nim li{float: left;width: 33%;margin-left: 0 !important;}
+.fa-chevron-left,.fa-repeat{
+  color: #fff;
+  margin-top: 6px;
+}
+.shou{margin-top: 6px;}
+table{
+  text-align: center;
+}
+.lists td{
+  font-size: 14px;
+  font-weight: bold;
+}
+/* .lists:nth-of-type(even){
+  background: #FFF8DC;
+} */
+.sigerd tbody td{padding-bottom:15px;}
+.sigerd tbody{border-bottom: 1px solid #ddd;}
+.explain{color: #999}
+h5{color: #999}
+/* .tbottom{background: #fff;color: #959595;padding:5px;margin-top: 10px; border: 1px solid #ddd;} */
+.tbottom h4{text-align: center;padding-top: 10px;}
+.yel{color:#e32030;}
+i{color:#e32030;}
+.she button{
+  border:none;
+  background: #ddd;
+  /* color:#fff; */
+  border-radius: 2px;
+  padding: 5px 20px;
+}
+.she td b.hong{
+border: 2px dotted;
+color: #e32030;
+border-radius: 10px;
+padding: 2px 4px;}
+
+.she td b.lan{
+  border: 2px dotted;
+  color: #169bd5;
+  border-radius: 10px;
+  padding: 2px 4px;}
+
+div#information button {
+    width: 30%;
+  }

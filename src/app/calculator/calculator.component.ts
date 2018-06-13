@@ -6,6 +6,7 @@ import {GetMatchesArgs} from "../service/interfaces";
 // import {Match, Event} from "../modules/match";
 // import {MatchGroup} from "../modules/match-group";
 // import {LeagueService} from "../service/league.service";
+// import * as $ from "jquery";
 import {State} from "../modules/state";
 import {LiveEvent} from "../modules/event";
 import { Http } from '@angular/http'; // (1)
@@ -30,6 +31,19 @@ export class CalculatorComponent implements OnInit {
   exception:string[];
   exceptionA:string[];
   exceptionD:string[];
+
+  info1:any;
+  info2:any;
+  info3:any;
+  info4:any;
+  info5:any;
+  info6:any;
+  info7:any;
+  info8:any;
+  info9:any;
+  info10:any;
+  info11:any;
+  shuju:string[];
     constructor(private QUERY: CalcuService, private router: Router,private message: ElMessageService) {
       
       this.QUERY.getMatch().subscribe(data => {
@@ -37,6 +51,9 @@ export class CalculatorComponent implements OnInit {
         // var dest: any = this.zuhe(data);
         // this.datashuju=data;
 
+        this.close=data[2].close;
+        // this.closeA =data[2].close.pool[0].HAD;
+        // this.closeD =data[2].close.pool[1].HHAD;
         this.prematch =data[0].prematch;
         console.log(this.prematch,"369")
         // this.prematchA =data[0].prematch.pool[0];
@@ -45,49 +62,28 @@ export class CalculatorComponent implements OnInit {
         this.inplay=data[1].inplay;
         // this.inplayA =data[1].inplay.pool[0].HAD;
         // this.inplayD =data[1].inplay.pool[1].HHAD;
-        this.close=data[2].close;
-        // this.closeA =data[2].close.pool[0].HAD;
-        // this.closeD =data[2].close.pool[1].HHAD;
         this.exception=data[3].exception;
         // this.exceptionA =data[3].exception.pool[0].HAD;
         // this.exceptionD =data[3].exception.pool[1].HHAD;
 
-        // var aa = [];
-        // var bb = [];
-        // var cc = [];
-        // var dd = [];
-        for (var i = 0; i < data[0].prematch.length; i++) {
-          this.prematchA =  data[0].prematch[i].pool.HAD;
-          this.prematchD =data[0].prematch[i].pool.HHAD;
-        }
-        for (var k = 0; k < data[1].inplay.length; k++) {
-          // this.inplay =data[i].inplay;
-          this.inplayA =  data[1].inplay[k].pool.HAD;
-          this.inplayD =data[1].inplay[k].pool.HHAD;
-          // for (var k = 0; k < data[i].inplay.length; k++) {
-            // this.prematchB =data[i].prematch[k].pool;
-            // for (var m = 0; m < a.length; m++) {
-            //    var b=a[m].HAD;
-            //   this.prematchA =data[0].prematch[i].pool[m].HAD;
-              console.log(this.inplayA,"256")
-            // }
-          // }
-          // aa.push(data[i].prematch);
-          // bb.push(data[i].inplay);
-          // cc.push(data[i].close);
-          // dd.push(data[i].exception);
-        }
-        for (var m = 0; m < data[2].close.length; m++) {
-          this.closeA =  data[2].close[m].pool.HAD;
-          this.closeD =data[2].close[m].pool.HHAD;
-        }
-        for (var u = 0; u < data[3].exception.length; u++) {
-          this.exceptionA =  data[3].exception[u].pool.HAD;
-          this.exceptionD =data[3].exception[u].pool.HHAD;
-        }
-        // console.log(aa,"未开始")
-        // console.log( bb,"进行中")
-        // console.log(cc,"已结束")
+        // for (var m = 0; m < data[2].close.length; m++) {
+        //   this.closeA =  data[2].close[m].pool.HAD;
+        //   this.closeD =data[2].close[m].pool.HHAD;
+        //   console.log(this.closeA,"HAD")
+        //   console.log(this.closeD,"让球")
+        // }
+        // for (var i = 0; i < data[0].prematch.length; i++) {
+        //   this.prematchA =  data[0].prematch[i].pool.HAD;
+        //   this.prematchD =data[0].prematch[i].pool.HHAD;
+        // }
+        // for (var k = 0; k < data[1].inplay.length; k++) {
+        //   this.inplayA =  data[1].inplay[k].pool.HAD;
+        //   this.inplayD =data[1].inplay[k].pool.HHAD;
+        // }
+        // for (var u = 0; u < data[3].exception.length; u++) {
+        //   this.exceptionA =  data[3].exception[u].pool.HAD;
+        //   this.exceptionD =data[3].exception[u].pool.HHAD;
+        // }
 
       })
     }
@@ -139,4 +135,40 @@ export class CalculatorComponent implements OnInit {
 // 			}
 // 			return dest;
 // 		}
+
+//点击赔率
+  cl(matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M){
+    console.log(matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M)
+    localStorage.setItem("info1", matchCode);
+    localStorage.setItem("info2", homeTeam);
+    localStorage.setItem("info3", awayTeam);
+    localStorage.setItem("info4", H);
+    localStorage.setItem("info5", A);
+    localStorage.setItem("info6", X);
+    localStorage.setItem("info7", rang);
+    localStorage.setItem("info8", F);
+    localStorage.setItem("info9", G);
+    localStorage.setItem("info10", T);
+    localStorage.setItem("info11", M);
+  }
+  //计算跳转
+  calcu(){
+    this.info1 = localStorage.getItem("info1")
+    this.info2 = localStorage.getItem("info2")
+    this.info3 = localStorage.getItem("info3")
+    this.info4 = localStorage.getItem("info4")
+    this.info5 = localStorage.getItem("info5")
+    this.info6 = localStorage.getItem("info6")
+    this.info7 = localStorage.getItem("info7")
+    this.info8 = localStorage.getItem("info8")
+    this.info9 = localStorage.getItem("info9")
+    this.info10 = localStorage.getItem("info10")
+    this.info11 = localStorage.getItem("info11")
+    // var url = "http://" + document.location.host + "/";
+
+    window.location.href = './assets/reckoner/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10+'&M='+this.info11;
+console.log('reckon/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10)
+
+    console.log(this.info1,this.info2,this.info3,this.info4,this.info5,this.info6,this.info7,this.info8,this.info9,this.info10,this.info11,"000")
+  }
 }
