@@ -44,8 +44,13 @@ export class CalculatorComponent implements OnInit {
   info10:any;
   info11:any;
   shuju:string[];
+  //颜色的判断
+  switchIndex :string;
+  switchI:string;
+  switchIn:string;
+  switchInd:string;
     constructor(private QUERY: CalcuService, private router: Router,private message: ElMessageService) {
-      
+      //uniCode,state
       this.QUERY.getMatch().subscribe(data => {
         console.log(data,"111")
         // var dest: any = this.zuhe(data);
@@ -137,7 +142,18 @@ export class CalculatorComponent implements OnInit {
 // 		}
 
 //点击赔率
-  cl(matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M){
+  cl(name,pool,i,matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M){
+    console.log(i,name)
+    if(name=="已结束" ){   
+        this.switchIndex = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+        
+    }else if(name=="进行中"){
+      this.switchI = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+    }else if(name=="未开始"){
+      this.switchIn = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+    }else{
+      this.switchInd = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+    }
     console.log(matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M)
     localStorage.setItem("info1", matchCode);
     localStorage.setItem("info2", homeTeam);

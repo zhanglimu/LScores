@@ -54,16 +54,15 @@ table{
 } */
 .sigerd tbody td{padding-bottom:15px;}
 .sigerd tbody{border-bottom: 1px solid #ddd;}
-.explain{color: #999}
+.explain{color: #999;font-size: 12px;}
 h5{color: #999}
 /* .tbottom{background: #fff;color: #959595;padding:5px;margin-top: 10px; border: 1px solid #ddd;} */
 .tbottom h4{text-align: center;padding-top: 10px;}
 .yel{color:#e32030;}
 i{color:#e32030;}
-.she button{
+/* .she button{
   border:none;
   background: #ddd;
-  /* color:#fff; */
   border-radius: 2px;
   padding: 5px 20px;
 }
@@ -77,8 +76,22 @@ padding: 2px 4px;}
   border: 2px dotted;
   color: #169bd5;
   border-radius: 10px;
-  padding: 2px 4px;}
+  padding: 2px 4px;} */
 
 div#information button {
     width: 30%;
+    font-size: 12px;
+  }
+.col-4,.col-12{
+  padding: 0 !important;
+}
+.col-12{margin-bottom: 10px;}
+#information input{
+    border: none;
+    width: 30%;
+    text-align: center;
+    font-weight: bold;
+  }
+  #information button{
+
   }

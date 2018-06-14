@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js grid component example</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Delete ".min" for console warnings in development -->
+    <script src="dist/vue.js"></script>
+    <script src="dist/axios.js"></script>
+    <script src="./Constant.js"></script>
+    <!-- <script src="dist/system.js"></script> -->
+    <!-- <script src="dist/system-production.js"></script> -->
+    <!-- <script src="./Constant.js"></script> -->
+    <!-- <script>
+      SystemJS.import('./Constant.js');
+    </script> -->
+  </head>
+  <body>
+
+    <!-- component template -->
+    <script type="text/x-template" id="grid-template">
+        <table v-if="filteredData.length">
+          <thead>
+            <tr>
+              <th v-for="key in columns" :key="key.id"
+                @click="sortBy(key)"
+                :class="{ active: sortKey == key }">
+                {{ key | capitalize }}
+                <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="entry in filteredData" :key="entry.id">
+              <td v-for="key in columns" :key="key.id">
+                {{entry[key]}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p v-else>No matches found.</p>
+    </script>
+
+    <!-- demo root element -->
+    <div id="demo">
+
+        <!-- 空行 -->
+        <div class="col-xs-12" style="height:20px;"></div>
+          <div>
+            Search <input name="query" v-model="searchQuery">
+            Odds Type Filter <input name="queryOddsType" v-model="searchQueryOddsype">
+            Days <input name="query_days" v-model="queryRangeDays">
+            <button id="btn-search-odds" @click="btn_get_json_esOdds()"> Search </button>
+            <span> &nbsp;&nbsp;&nbsp;&nbsp; 注: "0" 代表 MNL, FBL, HS; &nbsp;&nbsp;&nbsp;&nbsp; "1" 代表 HDC, SHDC; &nbsp;&nbsp;&nbsp;&nbsp; "2" 代表 HL, SHL</span>
+          </div>
+          <!-- child component -->
+          <demo-grid
+            :data="gridData"
+            :columns="gridColumns"
+            :filter-key="searchQuery"
+            :filter-key-oddstype="searchQueryOddsype"
+            :query-range-days="queryRangeDays">
+          </demo-grid>
+    </div>
+
+    <script src="grid.js"></script>
+
+  </body>
+</html>

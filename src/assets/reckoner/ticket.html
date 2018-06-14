@@ -11,16 +11,18 @@
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/ticket.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!-- vue part -->
+	<link rel="stylesheet" href="static/style.css">
+    <script src="static/dist/vue.js"></script>
+	<script src="static/Constant.js"></script>
 
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
 	<link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
     <script src="http://echarts.baidu.com/dist/echarts.min.js"></script>
 	<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-
 <body>
 	<header id="top">
 		<ul class="nim">
@@ -33,36 +35,36 @@
 			<li><i onclick="replaceDoc()" class="fa fa-repeat fa-lg right"></i></li>
 		</ul>
 	</header>
-
     <article>
         <div>
 			<h5 class="shou">专家推荐</h5>
 			<div class="a">
-				<table class="sigerd">
-
-				</table>
+				<table class="sigerd"></table>
 			</div>
-
 			<!-- Match information -->
+			<!-- Vue: demo root element -->
 			<div id="information">
-				
-
-
-				<div class="col-12" align="center"> 
-					<span> 胜平负 </span><br />
-					<button id = "1" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 胜 </button>
-					<button id = "2" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平 </button>
-					<button id = "3" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负 </button>
-				</div>
 				<div class="col-12" align="center">
-					<span> 让球胜平负 </span><br />
-					<button id = "4" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 胜 </button>
-					<button id = "5" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平 </button>
-					<button id = "6" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负 </button>
+					<input v-model="matchCode" readonly></input>
+					<input v-model="homeTeam" readonly></input>
+					<input v-model="awayTeam" readonly></input>
 				</div>
-				<br />
+				<div>
+					<div class="col-12" align="center"> 
+						<!-- <span> 胜平负 </span><br /> -->
+						<button id = "1" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 胜 {{homeOdds}} </button>
+						<button id = "2" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平 {{awayOdds}} </button>
+						<button id = "3" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负 {{drawOdds}} </button>
+					</div>
+					<div class="col-12" align="center">
+						<!-- <span> 让球胜平负 </span> -->
+						<button id = "4" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 胜[{{hhadLine}}] {{fOdds}} </button>
+						<button id = "5" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平[{{hhadLine}}] {{gOdds}} </button>
+						<button id = "6" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负[{{0-hhadLine}}] {{tOdds}} </button>
+					</div>
+					<!-- <br /> -->
+				</div>
 			</div>
-
 			<!-- Chart -->
 			<div class="echarts">
 				<div class="echartsdiv" style="width: 100%;border: 1px solid #ddd;">
@@ -73,7 +75,6 @@
 				<h4>购买后查看</h4>
 				<p class="ppp"><a href="javascript:history.go(-1)">去购买</a></p>
 			</div>
-			
 			<!-- Notes -->
 			<p class="explain">
 				<span>*从专家发布推荐后，彩易科思便通过计算推荐赛事和赔率对专家推荐方案进行报价。该报价会随着时间的流逝、比分变化等因素实时变化。</span><br>
@@ -82,14 +83,15 @@
 				<span>*最高价格：从有方案报价至今推荐彩票方案达到的最高价格</span>
 				<h5>以上数据由<i>彩易科思</i>提供</h5>
 			</p>
-
 			<!-- <div class="tbottom">
 				<h4>最高价格：<i>maxPrice-82</i></h4>
 			</div> -->
-
 		</div>
 	</article>
-
+	<!-- vue: component template -->
+	<script type="text/x-template" id="grid-template"></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="static/grid.js"></script>
 </body>	
 
 <script type="text/javascript">
@@ -103,52 +105,39 @@
 	var shuju
 	var count
 
-	var tkId = UrlParam.paramValues("tkId");  
-	var agentid = UrlParam.paramValues("agentid");  
-	console.log(tkId,agentid);
-			var matchCode = UrlParam.paramValues("matchCode");  
-			var homeTeam = UrlParam.paramValues("homeTeam");
-			var awayTeam = UrlParam.paramValues("awayTeam");  
-			var H = UrlParam.paramValues("H"); 
-			var A = UrlParam.paramValues("A");  
-			var X = UrlParam.paramValues("X"); 
-			var rang = UrlParam.paramValues("rang");  
-			var F = UrlParam.paramValues("F"); 
-			var G = UrlParam.paramValues("G");  
-			var T = UrlParam.paramValues("T");
-			var M = UrlParam.paramValues("M");   
-			console.log(matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M);  
-
+	// TODO: to use vue variables to replace the following vars parsed by jquery.
+	// http://localhost:4200/assets/reckoner/ticket.html?matchCode=1005&homeTeam=%E5%BE%B7%E5%9B%BD&awayTeam=%E5%B7%B4%E8%A5%BF&H=2.1&A=0.7&X=0.5&rang=-1&F=2.1&G=3.6&T=1.5&M=2
+	var matchCode = UrlParam.paramValues("matchCode");
+	var homeTeam = UrlParam.paramValues("homeTeam");
+	var awayTeam = UrlParam.paramValues("awayTeam");
+	var homeOdds = UrlParam.paramValues("H");
+	var awayOdds = UrlParam.paramValues("A");
+	var drawOdds = UrlParam.paramValues("X");
+	var hhadLine = UrlParam.paramValues("rang");
+	var fOdds = UrlParam.paramValues("F");
+	var gOdds = UrlParam.paramValues("G");
+	var tOdds = UrlParam.paramValues("T");
+	var mOpt = UrlParam.paramValues("M");
+	var tkId = matchCode + '-' + homeTeam + '-' + awayTeam
+	console.log(matchCode, homeTeam, awayTeam);
 	
-	var json={
-		"pay":"1",
-		"achievement":"1",
-		"Match":[
-			{
-				"homeName":"贝内文托",
-				"awayName":"热那亚",
-				"play":"1",
-			},
-			{
-				"homeName":"拉古纳",
-				"awayName":"托卢卡",
-				"play":"2",
-			}
-		]
-	};
+	// var json={
+	// 	"pay":"1",
+	// 	"achievement":"1",
+	// 	"Match":[
+	// 		{
+	// 			"homeName":"贝内文托",
+	// 			"awayName":"热那亚",
+	// 			"play":"1",
+	// 		},
+	// 		{
+	// 			"homeName":"拉古纳",
+	// 			"awayName":"托卢卡",
+	// 			"play":"2",
+	// 		}
+	// 	]
+	// };
 
-	var arr = document.getElementById('information').getElementsByTagName('button');
-	// init: option style change
-	var initOptionState = function(ii) {
-		// let ii = 2
-        for(var i = 0;i<arr.length;i++){
-			if(arr[i].id == ii){
-				arr[i].className = 'btn btn-danger'
-			} else {
-				arr[i].className = 'btn btn-default'
-			}
-		}
-	}
 
 	// ----== setters ==----
 	
@@ -190,13 +179,12 @@
 
 	// function: get chart data
     var funcGetChart = function (tkId) {
-		console.log('----== tkId ==---- : ' + tkId)
+		console.log('----== tkId ==---- : ' + matchCode,pool,option)
 		$.ajax({
 			async : false,
 			type : "GET",
 			// url : 'http://private-200ab-zhanglimu.apiary-mock.com/price/getTicketGraph?tkId=' + tkId+ '&agentid=' + agentid,
-			// url : 'http://private-200ab-zhanglimu.apiary-mock.com/price/getTicketGraph',
-			url: 'http://private-200ab-zhanglimu.apiary-mock.com/price/getTicketGraph?tkId=' + tkId,
+			url: 'http://private-200ab-zhanglimu.apiary-mock.com/price/getTicketGraph?matchCode=' +matchCode+ '&pool=' +pool+ '&option=' + option,
 			dataType : "json",
 			success : function(response) {
 				setChartData(response);
@@ -204,51 +192,48 @@
 		});
 	}
 
-
-	// function: display information
-	var information = function(dataObj, callback){
-		console.log(dataObj,"1");
-		if(callback && callback instanceof Function){
-			//callback();
-		
-			if(dataObj.pay==0){
-				$(".echarts").hide();
-				$(".bg").show();
-			}else{
-				$(".echarts").show();
-				$(".bg").hide();
-			}
-			
-			var html="";
-			$('.sigerd').empty();
-			for (var i = 0; i < dataObj.Match.length; i++) {
-				html +='<tbody><tr class="lists">';
-				html +='<td>'+dataObj.Match[i].homeName+'</td>';
-				html +='<td>VS</td>';
-				html +='<td>'+dataObj.Match[i].awayName+'</td></tr>';
-
-				// dataObj.Match[i].play==0?	html +='<tr class\="she\"><td><button style="background:#fe3c3c;color:#fff;">胜</button></td>'
-				// :	html +='<tr class\="she\"><td><button>胜</button></td>';
-				// dataObj.Match[i].play==1?	html +='<td>'+'<button style="background:#fe3c3c;color:#fff;">'+'平'+'</button>'+'</td>'
-				// :	html +='<td>'+'<button>'+'平'+'</button>'+'</td>';
-				// dataObj.Match[i].play==2?html +='<td class="td'+i+'"><button style="background:#fe3c3c;color:#fff;">负</button></td>'
-				// :	html +='<td class="td'+i+'"><button>负</button></td>';
-				// // dataObj[i].achievement==0?html+='<td><b class\="hong\">赢</b></td>'
-				// // :	html+='<td><b class\="lan\">负</b></td></tr>';
+	// 不再使用, 而是用 vue 替代了这部分 jquery 的拼接 html 的方法
+			// function: display information
+			var information = function(dataObj, callback){
+				console.log(dataObj,"1");
+				if(callback && callback instanceof Function){
+					//callback();
 				
-				html +='</tbody>';
+					if(dataObj.pay==0){
+						$(".echarts").hide();
+						$(".bg").show();
+					}else{
+						$(".echarts").show();
+						$(".bg").hide();
+					}
+					
+					var html="";
+					$('.sigerd').empty();
+					for (var i = 0; i < dataObj.Match.length; i++) {
+						html +='<tbody><tr class="lists">';
+						html +='<td>'+dataObj.Match[i].homeName+'</td>';
+						html +='<td>VS</td>';
+						html +='<td>'+dataObj.Match[i].awayName+'</td></tr>';
+
+						// dataObj.Match[i].play==0?	html +='<tr class\="she\"><td><button style="background:#fe3c3c;color:#fff;">胜</button></td>'
+						// :	html +='<tr class\="she\"><td><button>胜</button></td>';
+						// dataObj.Match[i].play==1?	html +='<td>'+'<button style="background:#fe3c3c;color:#fff;">'+'平'+'</button>'+'</td>'
+						// :	html +='<td>'+'<button>'+'平'+'</button>'+'</td>';
+						// dataObj.Match[i].play==2?html +='<td class="td'+i+'"><button style="background:#fe3c3c;color:#fff;">负</button></td>'
+						// :	html +='<td class="td'+i+'"><button>负</button></td>';
+						// // dataObj[i].achievement==0?html+='<td><b class\="hong\">赢</b></td>'
+						// // :	html+='<td><b class\="lan\">负</b></td></tr>';
+						
+						html +='</tbody>';
+					}
+					$('.sigerd').append(html);
+					// if(dataObj.achievement==0){
+					// 	$(".td0").after('<td><b class\="hong\">赢</b></td>')
+					// }else if(dataObj.achievement==1){
+					// 	$(".td0").after('<td><b class\="lan\">输</b></td>')
+					// }
+				}
 			}
-			$('.sigerd').append(html);
-			if(dataObj.achievement==0){
-				$(".td0").after('<td><b class\="hong\">赢</b></td>')
-			}else if(dataObj.achievement==1){
-				$(".td0").after('<td><b class\="lan\">输</b></td>')
-			}
-		}
-	}
-
-
-
 	// function: display information
 	var displayOptions = function(dataObj, callback){
 		console.log(dataObj,"1");
@@ -368,9 +353,9 @@
 	// function: refresh chart
 	
 	var funcRefresh = function() {
-		funcGetChart(tkId) // 1) ajax GET, 2) set the chart data + chart() 
-		chart(chartData)
-		information(json, function(){})
+		funcGetChart(tkId) // 1) ajax GET, 2) set the chart data 
+		chart(chartData) // 3) chart
+		// information(json, function(){})
 		echart()
 	}
 
@@ -403,8 +388,6 @@
 	}
 
 	// action: auto refresh chart
-	let ii = 3
-	initOptionState(ii)
 	funcRefresh()
 	setInterval(funcRefresh, 15000);
 

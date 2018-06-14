@@ -12,8 +12,8 @@ import {State} from "../modules/state";
 export class CalcuService {
  param : any;
   constructor(private http: Http) {}
-  getMatch(){
-    return this.http.get(AppConfig.baseUrl+'/caiexlive/getMatchInfo')
+  getMatch(){//uniCode,state
+    return this.http.get(AppConfig.baseUrl+'/caiexlive/getMatchInfo')//?matchCode=' +uniCode+ '&state=' +state
     .map(res=>res.json());
 }
 
