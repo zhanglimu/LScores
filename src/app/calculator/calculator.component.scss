@@ -79,12 +79,27 @@ i{
 .selected,.select,.sele,.se{
     background: #EB3B32 !important;
 }
+ div .el-collapse-item__header{
+    text-indent: 20px;
+}
+.bodydiv{
+    margin-bottom:60px !important;
+}
 #footer{
 	width: 100%;
-  height: 46px;
+  height: 60px;
   color: #ccc;
   position: fixed;
   left: 0;
   bottom: 0px;
   background: #666;
+}
+.fa-calculator{
+    float: right;
+    color: #fff;
+    margin: 14px 15px 0 0;
+}
+#footer span{
+    margin: 7px 0 0 15px;
+    font-size: 12px;
 }

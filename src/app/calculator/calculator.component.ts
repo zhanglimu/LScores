@@ -43,6 +43,8 @@ export class CalculatorComponent implements OnInit {
   info9:any;
   info10:any;
   info11:any;
+  info12:any;
+  info13:any;
   shuju:string[];
   //颜色的判断
   switchIndex :string;
@@ -51,23 +53,25 @@ export class CalculatorComponent implements OnInit {
   switchInd:string;
     constructor(private QUERY: CalcuService, private router: Router,private message: ElMessageService) {
       //uniCode,state
+      var uniCode="";
+      var state="";
       this.QUERY.getMatch().subscribe(data => {
         console.log(data,"111")
+        // console.log(uniCode,state,"369")
         // var dest: any = this.zuhe(data);
         // this.datashuju=data;
 
-        this.close=data[2].close;
+        this.close=data.close;
         // this.closeA =data[2].close.pool[0].HAD;
         // this.closeD =data[2].close.pool[1].HHAD;
-        this.prematch =data[0].prematch;
-        console.log(this.prematch,"369")
+        this.prematch =data.prematch;
         // this.prematchA =data[0].prematch.pool[0];
         // console.log(this.prematchA)
         // this.prematchD =data[0].prematch.pool[1].HHAD;
-        this.inplay=data[1].inplay;
+        this.inplay=data.inplay;
         // this.inplayA =data[1].inplay.pool[0].HAD;
         // this.inplayD =data[1].inplay.pool[1].HHAD;
-        this.exception=data[3].exception;
+        this.exception=data.exception;
         // this.exceptionA =data[3].exception.pool[0].HAD;
         // this.exceptionD =data[3].exception.pool[1].HHAD;
 
@@ -142,7 +146,7 @@ export class CalculatorComponent implements OnInit {
 // 		}
 
 //点击赔率
-  cl(name,pool,i,matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M){
+  cl(name,pool,i,matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M,uniCode){
     console.log(i,name)
     if(name=="已结束" ){   
         this.switchIndex = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
@@ -154,7 +158,7 @@ export class CalculatorComponent implements OnInit {
     }else{
       this.switchInd = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
     }
-    console.log(matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M)
+    console.log(name,pool,i,matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M,uniCode,"888")
     localStorage.setItem("info1", matchCode);
     localStorage.setItem("info2", homeTeam);
     localStorage.setItem("info3", awayTeam);
@@ -166,6 +170,8 @@ export class CalculatorComponent implements OnInit {
     localStorage.setItem("info9", G);
     localStorage.setItem("info10", T);
     localStorage.setItem("info11", M);
+    localStorage.setItem("info12", uniCode);
+    localStorage.setItem("info13", pool);
   }
   //计算跳转
   calcu(){
@@ -180,11 +186,12 @@ export class CalculatorComponent implements OnInit {
     this.info9 = localStorage.getItem("info9")
     this.info10 = localStorage.getItem("info10")
     this.info11 = localStorage.getItem("info11")
+    this.info12 = localStorage.getItem("info12")
+    this.info13 = localStorage.getItem("info13")
     // var url = "http://" + document.location.host + "/";
 
-    window.location.href = './assets/reckoner/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10+'&M='+this.info11;
-console.log('reckon/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10)
+    window.location.href = './assets/reckoner/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10+'&M='+this.info11+'&uniCode='+this.info12+'&pool='+this.info13;
 
-    console.log(this.info1,this.info2,this.info3,this.info4,this.info5,this.info6,this.info7,this.info8,this.info9,this.info10,this.info11,"000")
+    console.log(this.info1,this.info2,this.info3,this.info4,this.info5,this.info6,this.info7,this.info8,this.info9,this.info10,this.info11,this.info12,this.info13,"000")
   }
 }

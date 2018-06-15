@@ -4,8 +4,8 @@
         <div class="segment-button" [class.selected]="switchIndex === '1'" (click)="switch('1')">串关</div>
     </div>
 </div> -->
-<div>
-    <el-collapse [model]="[1]" [accordion]="true">
+<div class="bodydiv">
+    <el-collapse [model]="[1]">
         <el-collapse-item label="已结束" value="1">
         <!-- <div>06-08周六</div> -->
         <div>
@@ -105,7 +105,7 @@
                 </dd>
               </div>
         </el-collapse-item>
-        <el-collapse-item label="异常" value="4">
+        <el-collapse-item label="异常" value="4" style="margin-bottom:60px">
             <!-- <div>06-08周六</div> -->
             <div>
               <dd id="invisible" *ngFor="let exc of exception let i = index">

@@ -13,7 +13,7 @@ export class CalcuService {
  param : any;
   constructor(private http: Http) {}
   getMatch(){//uniCode,state
-    return this.http.get(AppConfig.baseUrl+'/caiexlive/getMatchInfo')//?matchCode=' +uniCode+ '&state=' +state
+    return this.http.get(AppConfig.baseUrl+'/calculator/caculatorMatches')//?matchCode=' +uniCode+ '&state=' +state
     .map(res=>res.json());
 }
 

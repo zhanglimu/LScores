@@ -1,4 +1,7 @@
 @charset "utf-8";
+body{
+  /* background-image:url("img/111.png"); */
+}
 #top{height: 48px;width: 100%;background: #E32030;}
 .point img {
 float:left;
@@ -35,13 +38,12 @@ margin:15px 0 0 20px;
   margin: 10px 0;
 }
 .nim{width: 100%;padding: 12px;}
-.nim h4{color: #fff;text-align: center;}
-.nim li{float: left;width: 33%;margin-left: 0 !important;}
+.nim li span{color: #fff;font-size: 20px;}
+.nim li{float: left;width: 33%;margin-left: 0 !important;text-align: center;}
 .fa-chevron-left,.fa-repeat{
   color: #fff;
   margin-top: 6px;
 }
-.shou{margin-top: 6px;}
 table{
   text-align: center;
 }
@@ -77,15 +79,25 @@ padding: 2px 4px;}
   color: #169bd5;
   border-radius: 10px;
   padding: 2px 4px;} */
-
+.last{
+  font-weight: none;
+  font-size: 14px;
+}
 div#information button {
     width: 30%;
-    font-size: 12px;
+    height: 35px;
+    font-size: 14px;
+  }
+  .jia{
+    margin-bottom: 20px;
   }
 .col-4,.col-12{
   padding: 0 !important;
 }
-.col-12{margin-bottom: 10px;}
+.col-12{margin-bottom: 20px;}
+/* .col-12 button{
+  background-color: #f0f0f0;
+} */
 #information input{
     border: none;
     width: 30%;

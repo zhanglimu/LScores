@@ -28,6 +28,8 @@ var demo = new Vue({
     this.gOdds = this.getUrlKey('G')
     this.tOdds = this.getUrlKey('T')
     this.mOpt = this.getUrlKey('M')
+    this.uniCode = this.getUrlKey('uniCode')
+    this.pool = this.getUrlKey('pool')
 
     this.initOptionState(this.mOpt)
   },
