@@ -1,18 +1,21 @@
-<!-- <div class="header-bar">
+<div class="header-bar">
     <div class="segment">
-        <div class="segment-button" [class.selected]="switchIndex === '0'" (click)="switch('0')">单关</div>
-        <div class="segment-button" [class.selected]="switchIndex === '1'" (click)="switch('1')">串关</div>
+        <button class="segment-button" [class.colored]="switchIndex === '0'" (click)="switch('0')">单关</button>
+        <button class="segment-button" [class.colored]="switchIndex === '1'" (click)="switch('1')">串关</button>
     </div>
-</div> -->
-<div class="bodydiv">
+</div>
+<div #content [ngSwitch]="switchIndex">
+
+<div class="bodydiv" *ngSwitchCase="0">
     <el-collapse [model]="[1]">
-        <el-collapse-item label="已结束" value="1">
+        <el-collapse-item label="已结束" value="1" style="text-indent:15px;">
         <!-- <div>06-08周六</div> -->
-        <div>
+        <div style="text-indent:0px;">
             <dd id="invisible" *ngFor="let clo of close let i = index">
                 <ul style="height:120px;">
                     <li class="clearfix">
                         <div class="events" style="height:120px;">
+                            <br>
                             <span>{{clo.league}}</span>
                             <b>{{clo.matchCode}}</b>
                             <i>{{clo.matchDate.substring(5,10)}}</i>
@@ -24,14 +27,14 @@
                                 <div class="ad">{{clo.awayTeam}}</div>
                             </div>
                             <div class="eventsnum" *ngIf="clo.pool.HAD">
-                                <span class="zhuwin" [class.selected]="switchIndex ==='HAD1'+i" (click)="cl('已结束','HAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'1',clo.uniCode)">胜<i>{{clo.pool.HAD.H}}</i></span>
-                                <span class="eventp" [class.selected]="switchIndex ==='HAD2'+i" (click)="cl('已结束','HAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'2',clo.uniCode)">平<i>{{clo.pool.HAD.A}}</i></span>
-                                <span class="kewin" [class.selected]="switchIndex ==='HAD3'+i" (click)="cl('已结束','HAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'3',clo.uniCode)">负<i>{{clo.pool.HAD.X}}</i></span>
+                                <span class="zhuwin" [class.selected]="switcha ==='HAD1'+i" (click)="cl('已结束','HAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'1',clo.uniCode)">胜<i>{{clo.pool.HAD.H}}</i></span>
+                                <span class="eventp" [class.selected]="switcha ==='HAD2'+i" (click)="cl('已结束','HAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'2',clo.uniCode)">平<i>{{clo.pool.HAD.X}}</i></span>
+                                <span class="kewin" [class.selected]="switcha ==='HAD3'+i" (click)="cl('已结束','HAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'3',clo.uniCode)">负<i>{{clo.pool.HAD.A}}</i></span>
                             </div>
                             <div class="eventsnum" *ngIf="clo.pool.HHAD">
-                                <span class="zhuwin" [class.selected]="switchIndex ==='HHAD4'+i" (click)="cl('已结束','HHAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'4',clo.uniCode)">{{clo.handcapline}}胜<i>{{clo.pool.HHAD.H}}</i></span>
-                                <span class="eventp" [class.selected]="switchIndex ==='HHAD5'+i" (click)="cl('已结束','HHAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'5',clo.uniCode)">{{clo.handcapline}}平<i>{{clo.pool.HHAD.A}}</i></span>
-                                <span class="kewin" [class.selected]="switchIndex ==='HHAD6'+i" (click)="cl('已结束','HHAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'6',clo.uniCode)">{{clo.handcapline}}负<i>{{clo.pool.HHAD.X}}</i></span>
+                                <span class="zhuwin" [class.selected]="switcha ==='HHAD4'+i" (click)="cl('已结束','HHAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'4',clo.uniCode)">{{clo.handcapline}}胜<i>{{clo.pool.HHAD.H}}</i></span>
+                                <span class="eventp" [class.selected]="switcha ==='HHAD5'+i" (click)="cl('已结束','HHAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'5',clo.uniCode)">{{clo.handcapline}}平<i>{{clo.pool.HHAD.X}}</i></span>
+                                <span class="kewin" [class.selected]="switcha ==='HHAD6'+i" (click)="cl('已结束','HHAD',i,clo.matchCode,clo.homeTeam,clo.awayTeam,clo.pool.HAD.H,clo.pool.HAD.A,clo.pool.HAD.X,clo.handcapline,clo.pool.HHAD.H,clo.pool.HHAD.A,clo.pool.HHAD.X,'6',clo.uniCode)">{{clo.handcapline}}负<i>{{clo.pool.HHAD.A}}</i></span>
                             </div>
                         </div>
                     </li>
@@ -39,13 +42,14 @@
             </dd>
           </div>
         </el-collapse-item>
-        <el-collapse-item label="进行中" value="2">
+        <el-collapse-item label="进行中" value="2" style="text-indent:15px;">
             <!-- <div>06-08周六</div> -->
-            <div>
+            <div style="text-indent:0px;">
               <dd id="invisible" *ngFor="let in of inplay let i = index">
                   <ul style="height:120px;">
                       <li class="clearfix">
                           <div class="events" style="height:120px;">
+                              <br>
                               <span>{{in.league}}</span>
                               <b>{{in.matchCode}}</b>
                               <i>{{in.matchDate.substring(5,10)}}</i>
@@ -57,14 +61,14 @@
                                   <div class="ad">{{in.awayTeam}}</div>
                               </div>
                               <div class="eventsnum" *ngIf="in.pool.HAD">
-                                  <span class="zhuwin" [class.select]="switchI ==='HAD1'+i" (click)="cl('进行中','HAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'1',in.uniCode)">胜<i>{{in.pool.HAD.H}}</i></span>
-                                  <span class="eventp" [class.select]="switchI ==='HAD2'+i" (click)="cl('进行中','HAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'2',in.uniCode)">平<i>{{in.pool.HAD.A}}</i></span>
-                                  <span class="kewin" [class.select]="switchI ==='HAD3'+i" (click)="cl('进行中','HAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'3',in.uniCode)">负<i>{{in.pool.HAD.X}}</i></span>
+                                  <span class="zhuwin" [class.select]="switchb ==='HAD1'+i" (click)="cl('进行中','HAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'1',in.uniCode)">胜<i>{{in.pool.HAD.H}}</i></span>
+                                  <span class="eventp" [class.select]="switchb ==='HAD2'+i" (click)="cl('进行中','HAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'2',in.uniCode)">平<i>{{in.pool.HAD.X}}</i></span>
+                                  <span class="kewin" [class.select]="switchb ==='HAD3'+i" (click)="cl('进行中','HAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'3',in.uniCode)">负<i>{{in.pool.HAD.A}}</i></span>
                               </div>
                               <div class="eventsnum" *ngIf="in.pool.HHAD">
-                                  <span class="zhuwin" [class.select]="switchI ==='HHAD4'+i" (click)="cl('进行中','HHAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'4',in.uniCode)">{{in.handcapline}}胜<i>{{in.pool.HHAD.H}}</i></span>
-                                  <span class="eventp" [class.select]="switchI ==='HHAD5'+i" (click)="cl('进行中','HHAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'5',in.uniCode)">{{in.handcapline}}平<i>{{in.pool.HHAD.A}}</i></span>
-                                  <span class="kewin" [class.select]="switchI ==='HHAD6'+i" (click)="cl('进行中','HHAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'6',in.uniCode)">{{in.handcapline}}负<i>{{in.pool.HHAD.X}}</i></span>
+                                  <span class="zhuwin" [class.select]="switchb ==='HHAD4'+i" (click)="cl('进行中','HHAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'4',in.uniCode)">{{in.handcapline}}胜<i>{{in.pool.HHAD.H}}</i></span>
+                                  <span class="eventp" [class.select]="switchb ==='HHAD5'+i" (click)="cl('进行中','HHAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'5',in.uniCode)">{{in.handcapline}}平<i>{{in.pool.HHAD.X}}</i></span>
+                                  <span class="kewin" [class.select]="switchb ==='HHAD6'+i" (click)="cl('进行中','HHAD',i,in.matchCode,in.homeTeam,in.awayTeam,in.pool.HAD.H,in.pool.HAD.A,in.pool.HAD.X,in.handcapline,in.pool.HHAD.H,in.pool.HHAD.A,in.pool.HHAD.X,'6',in.uniCode)">{{in.handcapline}}负<i>{{in.pool.HHAD.A}}</i></span>
                               </div>
                           </div>
                       </li>
@@ -72,13 +76,14 @@
               </dd>
             </div>
         </el-collapse-item>
-        <el-collapse-item label="未开始" value="3">
+        <el-collapse-item label="未开始" value="3" style="text-indent:15px;">
             <!-- <div>06-08周六</div> -->
-            <div>
+            <div style="text-indent:0px;">
                 <dd id="invisible" *ngFor="let pre of prematch let i = index">
                     <ul style="height:120px;">
                         <li class="clearfix">
                             <div class="events" style="height:120px;">
+                                <br>
                                 <span>{{pre.league}}</span>
                                 <b>{{pre.matchCode}}</b>
                                 <i>{{pre.matchDate.substring(5,10)}}</i>
@@ -90,14 +95,14 @@
                                     <div class="ad">{{pre.awayTeam}}</div>
                                 </div>
                                 <div class="eventsnum" *ngIf="pre.pool.HAD">
-                                    <span class="zhuwin" [class.sele]="switchIn ==='HAD1'+i" (click)="cl('未开始','HAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'1',pre.uniCode)">胜<i>{{pre.pool.HAD.H}}</i></span>
-                                    <span class="eventp" [class.sele]="switchIn ==='HAD2'+i" (click)="cl('未开始','HAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'2',pre.uniCode)">平<i>{{pre.pool.HAD.A}}</i></span>
-                                    <span class="kewin" [class.sele]="switchIn ==='HAD3'+i" (click)="cl('未开始','HAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'3',pre.uniCode)">负<i>{{pre.pool.HAD.X}}</i></span>
+                                    <span class="zhuwin" [class.sele]="switchc ==='HAD1'+i" (click)="cl('未开始','HAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'1',pre.uniCode)">胜<i>{{pre.pool.HAD.H}}</i></span>
+                                    <span class="eventp" [class.sele]="switchc ==='HAD2'+i" (click)="cl('未开始','HAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'2',pre.uniCode)">平<i>{{pre.pool.HAD.X}}</i></span>
+                                    <span class="kewin" [class.sele]="switchc ==='HAD3'+i" (click)="cl('未开始','HAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'3',pre.uniCode)">负<i>{{pre.pool.HAD.A}}</i></span>
                                 </div>
                                 <div class="eventsnum" *ngIf="pre.pool.HHAD">
-                                    <span class="zhuwin" [class.sele]="switchIn ==='HHAD4'+i" (click)="cl('未开始','HHAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'4',pre.uniCode)">{{pre.handcapline}}胜<i>{{pre.pool.HHAD.H}}</i></span>
-                                    <span class="eventp" [class.sele]="switchIn ==='HHAD5'+i" (click)="cl('未开始','HHAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'5',pre.uniCode)">{{pre.handcapline}}平<i>{{pre.pool.HHAD.A}}</i></span>
-                                    <span class="kewin" [class.sele]="switchIn ==='HHAD6'+i" (click)="cl('未开始','HHAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'6',pre.uniCode)">{{pre.handcapline}}负<i>{{pre.pool.HHAD.X}}</i></span>
+                                    <span class="zhuwin" [class.sele]="switchc ==='HHAD4'+i" (click)="cl('未开始','HHAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'4',pre.uniCode)">{{pre.handcapline}}胜<i>{{pre.pool.HHAD.H}}</i></span>
+                                    <span class="eventp" [class.sele]="switchc ==='HHAD5'+i" (click)="cl('未开始','HHAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'5',pre.uniCode)">{{pre.handcapline}}平<i>{{pre.pool.HHAD.X}}</i></span>
+                                    <span class="kewin" [class.sele]="switchc ==='HHAD6'+i" (click)="cl('未开始','HHAD',i,pre.matchCode,pre.homeTeam,pre.awayTeam,pre.pool.HAD.H,pre.pool.HAD.A,pre.pool.HAD.X,pre.handcapline,pre.pool.HHAD.H,pre.pool.HHAD.A,pre.pool.HHAD.X,'6',pre.uniCode)">{{pre.handcapline}}负<i>{{pre.pool.HHAD.A}}</i></span>
                                 </div>
                             </div>
                         </li>
@@ -105,13 +110,14 @@
                 </dd>
               </div>
         </el-collapse-item>
-        <el-collapse-item label="异常" value="4" style="margin-bottom:60px">
+        <el-collapse-item *ngIf="yichang" label="异常" value="4" style="margin-bottom:60px;text-indent:15px;">
             <!-- <div>06-08周六</div> -->
-            <div>
+            <div style="text-indent:0px;">
               <dd id="invisible" *ngFor="let exc of exception let i = index">
                   <ul style="height:120px;">
                       <li class="clearfix">
                           <div class="events" style="height:120px;">
+                              <br>
                               <span>{{exc.league}}</span>
                               <b>{{exc.matchCode}}</b>
                               <i>{{exc.matchDate.substring(5,10)}}</i>
@@ -123,14 +129,14 @@
                                   <div class="ad">{{exc.awayTeam}}</div>
                               </div>
                               <div class="eventsnum" *ngIf="exc.pool.HAD">
-                                  <span class="zhuwin" [class.se]="switchInd ==='HAD1'+i" (click)="cl('异常','HAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'1',exc.uniCode)">胜<i>{{exc.pool.HAD.H}}</i></span>
-                                  <span class="eventp" [class.se]="switchInd ==='HAD2'+i" (click)="cl('异常','HAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'2',exc.uniCode)">平<i>{{exc.pool.HAD.A}}</i></span>
-                                  <span class="kewin" [class.se]="switchInd ==='HAD3'+i" (click)="cl('异常','HAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'3',exc.uniCode)">负<i>{{exc.pool.HAD.X}}</i></span>
+                                  <span class="zhuwin" [class.se]="switchg ==='HAD1'+i" (click)="cl('异常','HAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'1',exc.uniCode)">胜<i>{{exc.pool.HAD.H}}</i></span>
+                                  <span class="eventp" [class.se]="switchg ==='HAD2'+i" (click)="cl('异常','HAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'2',exc.uniCode)">平<i>{{exc.pool.HAD.X}}</i></span>
+                                  <span class="kewin" [class.se]="switchg ==='HAD3'+i" (click)="cl('异常','HAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'3',exc.uniCode)">负<i>{{exc.pool.HAD.A}}</i></span>
                               </div>
                               <div class="eventsnum" *ngIf="exc.pool.HHAD">
-                                  <span class="zhuwin" [class.se]="switchInd ==='HHAD4'+i" (click)="cl('异常','HHAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'4',exc.uniCode)">{{exc.handcapline}}胜<i>{{exc.pool.HHAD.H}}</i></span>
-                                  <span class="eventp" [class.se]="switchInd ==='HHAD5'+i" (click)="cl('异常','HHAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'5',exc.uniCode)">{{exc.handcapline}}平<i>{{exc.pool.HHAD.A}}</i></span>
-                                  <span class="kewin" [class.se]="switchInd ==='HHAD6'+i" (click)="cl('异常','HHAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'6',exc.uniCode)">{{exc.handcapline}}负<i>{{exc.pool.HHAD.X}}</i></span>
+                                  <span class="zhuwin" [class.se]="switchg ==='HHAD4'+i" (click)="cl('异常','HHAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'4',exc.uniCode)">{{exc.handcapline}}胜<i>{{exc.pool.HHAD.H}}</i></span>
+                                  <span class="eventp" [class.se]="switchg ==='HHAD5'+i" (click)="cl('异常','HHAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'5',exc.uniCode)">{{exc.handcapline}}平<i>{{exc.pool.HHAD.X}}</i></span>
+                                  <span class="kewin" [class.se]="switchg ==='HHAD6'+i" (click)="cl('异常','HHAD',i,exc.matchCode,exc.homeTeam,exc.awayTeam,exc.pool.HAD.H,exc.pool.HAD.A,exc.pool.HAD.X,exc.handcapline,exc.pool.HHAD.H,exc.pool.HHAD.A,exc.pool.HHAD.X,'6',exc.uniCode)">{{exc.handcapline}}负<i>{{exc.pool.HHAD.A}}</i></span>
                               </div>
                           </div>
                       </li>
@@ -144,6 +150,13 @@
     <!-- <a href="'./assets/reckoner/ticket.html?matchCode='+this.info1+'&homeTeam='+this.info2+'&awayTeam='+this.info3+'&H='+this.info4+'&A='+this.info5+'&X='+this.info6+'&rang='+this.info7+'&F='+this.info8+'&G='+this.info9+'&T='+this.info10+'&M='+this.info11"> -->
         <i class="fa fa-calculator fa-2x" aria-hidden="true" (click)="calcu()"></i>
     <!-- </a> -->
-    <span>单关计算机只支持查看单场单选玩法</span><br>
+    <span>单关计算器只支持查看单场单选玩法</span><br>
     <span>默认本金：<i>1000</i>元</span>
+</div>
+<div class="bodydiv" *ngSwitchCase="1">
+    <h4 style="text-align: center;padding-top: 200px;">正在开发中...</h4>
+</div>
+
+
+
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Graphic line</title>  	
+	<title>彩ex</title>  	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="shortcut icon" type="image/x-icon" href="./img/biticon.ico" media="screen" />
 
@@ -44,43 +44,43 @@
 			<!-- Vue: demo root element -->
 			<div id="information">
 				<div class="col-12" align="center">
-					<input v-model="matchCode"  readonly="readonly"></input>
 					<input v-model="homeTeam"  readonly="readonly"></input>
+					<input  readonly="readonly"></input>
 					<input v-model="awayTeam"  readonly="readonly"></input>
 				</div>
 				<div>
 					<div class="col-12" align="center"> 
 						<!-- <span> 胜平负 </span><br /> -->
 						<button id = "1" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 胜 {{homeOdds}} </button>
-						<button id = "2" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平 {{awayOdds}} </button>
-						<button id = "3" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负 {{drawOdds}} </button>
+						<button id = "2" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平 {{drawOdds}} </button>
+						<button id = "3" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负 {{awayOdds}} </button>
 					</div>
 					<div class="col-12" align="center">
 						<!-- <span> 让球胜平负 </span> -->
 						<button id = "4" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 胜[{{hhadLine}}] {{fOdds}} </button>
-						<button id = "5" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平[{{hhadLine}}] {{gOdds}} </button>
-						<button id = "6" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负[{{0-hhadLine}}] {{tOdds}} </button>
+						<button id = "5" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 平[{{hhadLine}}] {{tOdds}} </button>
+						<button id = "6" type = "button" class = "btn btn-default" onclick = "btnClickOnOption(this)"> 负[{{0-hhadLine}}] {{gOdds}} </button>
 					</div>
 					<!-- <br /> -->
 				</div>
 			</div>
-			<div class="jia">
-				<b>最高价格：<i>1000</i></b>
+			<!-- <div class="jia">
+				<b>最高价格：<i>9999</i></b>
 				<b>当前价格：<i>1000</i></b>
-			</div>
+			</div> -->
 			<!-- Chart -->
 			<div class="echarts">
 				<div class="echartsdiv" style="width: 100%;border: 1px solid #ddd;">
 					<div id="main" style="width: 100%; height:250px;"></div>
 				</div>
 			</div>
-			<div class="bg">
+			<!-- <div class="bg">
 				<h4>购买后查看</h4>
 				<p class="ppp"><a href="javascript:history.go(-1)">去购买</a></p>
-			</div>
+			</div> -->
 			<!-- Notes -->
 			<p class="explain">
-				<span>价格走势：按照投注本金为1000元，为这注彩票方案提供实时的报价。</span><br>
+				<span>价格走势：每个彩票方案出票金额为1000元，彩易科思为该彩票方案提供从竞彩开售到比赛结束的实时报价</span><br>
 				<b class="last">以上数据由<i>彩易科思</i>提供</b>
 			</p>
 		</div>
@@ -94,14 +94,14 @@
 <script type="text/javascript">
 localStorage.removeItem("zimu")
 	// ----== variables ==----
-	$(".bg").hide();
+	// $(".bg").hide();
 
 	// data: init variables
 	var chartData
 	var Xtimes    //实际用来盛放X轴坐标值
 	var shuju
 	var count
-
+var lastdata
 	var zi
 	// TODO: to use vue variables to replace the following vars parsed by jquery.
 	// http://localhost:4200/assets/reckoner/ticket.html?matchCode=1005&homeTeam=%E5%BE%B7%E5%9B%BD&awayTeam=%E5%B7%B4%E8%A5%BF&H=2.1&A=0.7&X=0.5&rang=-1&F=2.1&G=3.6&T=1.5&M=2
@@ -119,58 +119,80 @@ localStorage.removeItem("zimu")
 	var uniCode = UrlParam.paramValues("uniCode");
 	var pool = UrlParam.paramValues("pool");
 
-	if(mOpt==1 ||mOpt==4){
-		this.zi="1";
-	}else if(mOpt==2 ||mOpt==5){
-		this.zi="2";
-	}else{
-		this.zi="3";
-	}
+if(mOpt==1){
+	this.zi="1";
+}else if(mOpt==2){
+	this.zi="X";
+}else if(mOpt==3){
+	this.zi="2";
+}else if(mOpt==4){
+	this.zi="1"+"["+hhadLine+"]";
+}else if(mOpt==5){
+	this.zi="X"+"["+hhadLine+"]";
+}else{
+	hhadLine = hhadLine>0 ? "-"+hhadLine : Math.abs(hhadLine)
+	this.zi="2"+"["+hhadLine+"]";
+}
 
 var play=pool;
-
 	var tkId = matchCode + '-' + homeTeam + '-' + awayTeam
 	console.log(matchCode, homeTeam, awayTeam,uniCode,pool,'/*/*/*');
-
 	// ----== setters ==----
-	
 	// setter: chartData
 	var setChartData = function(chartdata){
 		this.chartData = chartdata;
+		if(this.chartData !="暂无数据"){
+			chart(this.chartData) // 3) chart
+			echart()
+			$(".haha").empty();
+		}else{
+			$(".jia").empty();
+			$(".haha").empty();
+			$('#main').before('<div class\="haha\">'+'<b>暂无数据</b>'+'</div >');
+			chart(this.chartData) // 3) chart
+			echart()
+			
+			// chart(this.lastdata) // 3) chart
+			// echart()
+		}
 		// chart(this.chartData)
 	}
-
 	// setter: tkId
 	var setTkId = function(tkid){
 		this.tkId = tkid;
 	}
-	
 	// function: chart deco
 	var chart = function(data) {
 		Xtimes = [];    //实际用来盛放X轴坐标值
 		shuju = [];
 		count = 0;
-		countt =0;
-		// maxprice = data.maxPrice;
-		successdata = data.oddsHistory;
-		// successdata = JSON.parse(successdata);
+		// if(data!=null&&data.maxPrice!=null){
+		// 	maxPrice = data.maxPrice;
+		// }else{
+		// 	maxPrice ="0";
+		// }
+		
+		// if(data!=null&&data.currentPrice!=undefined){
+		// 	currentPrice = data.currentPrice;
+		// }else{
+		// 	currentPrice = "0";
+		// }
+		maxPrice = data.maxPrice; //!=null ? data.maxPrice : 0;
+		currentPrice = data.currnetPrice; //!=null ? data.currentPrice : 0;
+			successdata = data.oddsHistory;
 		if (successdata) {
 			count =successdata.length;
 			price = 1000;
-			successdata[0].timestamp="出票";
-			successdata[count-1].timestamp="当前";
+			//successdata[count-1].timestamp="当前";
 			shuju.push(price)
 			// Xtimes.push(timestamp)
 			if(count>1){
+				var timestamp = "出票";
+				Xtimes.push(timestamp);
 				for (var i = 0; i < count; i++) {
 					Xtimes.push(successdata[i].timestamp);
 					shuju.push(successdata[i].price);
-					console.log(i,"bbbbb",i+1);
-					// if(i+1==count){
-					// 	console.log("hhhh")
-					// 	//Xtimes.push(successdata[i+1].timestamp);
-					// shuju.push(price);
-					// }
+				
 				}
 			}else{
 				var timestamp = "出票";
@@ -178,10 +200,12 @@ var play=pool;
 				Xtimes.push(successdata[0].timestamp);
 				shuju.push(successdata[0].price);
 			}
-			console.log(shuju,"aaaa");
+			Xtimes[Xtimes.length-1]="当前"	
 		}
-		$(".tbottom").empty();
-		// $('#main').before('<div class\="tbottom\">'+'<h4>'+'最高价格：'+'<i>' + data.maxPrice + '</i>'+'</h4>'+'</div >');
+		if(this.chartData !="暂无数据"){
+		$(".jia").empty();
+		$('#information').after('<div class\="jia\">'+'<b>'+'最高价格：'+'<i>' + maxPrice + '</i>'+'</b>'+'<b>'+'当前价格：'+'<i>' + currentPrice + '</i>'+'</b>'+'</div >');
+		}
 	}
 
 	// function: get chart data
@@ -190,12 +214,22 @@ var play=pool;
 		$.ajax({
 			async : false,
 			type : "GET",
-			url : 'http://192.168.1.5:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
+			//生产
+			// url : 'http://live-service.caiex.com:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
+			//1.5
+			// url : 'http://192.168.1.5:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
+			//云测试
+			url : 'http://caiex-live.jingcai.trade:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
+			
 			// url: 'https://private-200ab-zhanglimu.apiary-mock.com/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
 			dataType : "json",
 			success : function(response) {
+				console.log(response,"*******")
 				setChartData(response);
-				console.log(response)
+			}
+			,
+			error:function(error){
+				setChartData("暂无数据");
 			}
 		});
 	}
@@ -207,14 +241,6 @@ var play=pool;
 				if(callback && callback instanceof Function){
 					//callback();
 				
-					if(dataObj.pay==0){
-						$(".echarts").hide();
-						$(".bg").show();
-					}else{
-						$(".echarts").show();
-						$(".bg").hide();
-					}
-					
 					var html="";
 					$('.sigerd').empty();
 					for (var i = 0; i < dataObj.Match.length; i++) {
@@ -222,24 +248,9 @@ var play=pool;
 						html +='<td>'+dataObj.Match[i].homeName+'</td>';
 						html +='<td>VS</td>';
 						html +='<td>'+dataObj.Match[i].awayName+'</td></tr>';
-
-						// dataObj.Match[i].play==0?	html +='<tr class\="she\"><td><button style="background:#fe3c3c;color:#fff;">胜</button></td>'
-						// :	html +='<tr class\="she\"><td><button>胜</button></td>';
-						// dataObj.Match[i].play==1?	html +='<td>'+'<button style="background:#fe3c3c;color:#fff;">'+'平'+'</button>'+'</td>'
-						// :	html +='<td>'+'<button>'+'平'+'</button>'+'</td>';
-						// dataObj.Match[i].play==2?html +='<td class="td'+i+'"><button style="background:#fe3c3c;color:#fff;">负</button></td>'
-						// :	html +='<td class="td'+i+'"><button>负</button></td>';
-						// // dataObj[i].achievement==0?html+='<td><b class\="hong\">赢</b></td>'
-						// // :	html+='<td><b class\="lan\">负</b></td></tr>';
-						
 						html +='</tbody>';
 					}
 					$('.sigerd').append(html);
-					// if(dataObj.achievement==0){
-					// 	$(".td0").after('<td><b class\="hong\">赢</b></td>')
-					// }else if(dataObj.achievement==1){
-					// 	$(".td0").after('<td><b class\="lan\">输</b></td>')
-					// }
 				}
 			}
 	// function: display information
@@ -248,14 +259,6 @@ var play=pool;
 		if(callback && callback instanceof Function){
 			//callback();
 		
-			if(dataObj.pay==0){
-				$(".echarts").hide();
-				$(".bg").show();
-			}else{
-				$(".echarts").show();
-				$(".bg").hide();
-			}
-			
 			var html="";
 			$('.sigerd').empty();
 			for (var i = 0; i < dataObj.Match.length; i++) {
@@ -320,7 +323,7 @@ var play=pool;
 					}
 				},
 				axisLabel: {
-					interval:count-2,
+					interval:count-1,
 					// rotate : 40, 
 				},
 			}],
@@ -355,39 +358,39 @@ var play=pool;
 		};
 		
 		myChart.setOption(option, true);
-
 	}
 
 	// function: refresh chart
 	
 	var funcRefresh = function(tkId) {
 		console.log(this.zi,"*9*9*");
-		let zi = localStorage.getItem("zimu");
 		funcGetChart(tkId) // 1) ajax GET, 2) set the chart data 
-		chart(this.chartData) // 3) chart
-		// information(json, function(){})
-		echart()
+		
 	}
 
 	// ----== buttons/actions ==----
-
 	// button: refresh url
 	function replaceDoc(){
-		window.location.reload()
+		funcRefresh();
 	}
-
 	// -- -- button: click on other options
-	var btnClickOnOption = function(thisButton) {		
+	var btnClickOnOption = function(thisButton) {	
 // let zimu="";
 		let tempId = '4001HAD1'
 		setTkId(tempId)
-if(thisButton.id==1 ||thisButton.id==4){
+if(thisButton.id==1){
 	this.zi="1";
-
-}else if(thisButton.id==2 ||thisButton.id==5){
+}else if(thisButton.id==2){
+	this.zi="X";
+}else if(thisButton.id==3){
 	this.zi="2";
+}else if(thisButton.id==4){
+	this.zi="1"+"["+hhadLine+"]";
+}else if(thisButton.id==5){
+	this.zi="X"+"["+hhadLine+"]";
 }else{
-	this.zi="3";
+	hhadLine = hhadLine>0 ? "-"+hhadLine : Math.abs(hhadLine)
+	this.zi="2"+"["+hhadLine+"]";
 }
 if(thisButton.id==1 ||thisButton.id==2 ||thisButton.id==3){
 	this.play="HAD";
@@ -404,11 +407,12 @@ if(thisButton.id==1 ||thisButton.id==2 ||thisButton.id==3){
 				}  
 			}     
 		}
+		funcRefresh()
 	}
 
 	// action: auto refresh chart
 	funcRefresh()
-	setInterval(funcRefresh, 15000);
+	setInterval(funcRefresh, 30000);
 
 </script>
 

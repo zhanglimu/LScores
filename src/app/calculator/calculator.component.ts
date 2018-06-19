@@ -6,7 +6,7 @@ import {GetMatchesArgs} from "../service/interfaces";
 // import {Match, Event} from "../modules/match";
 // import {MatchGroup} from "../modules/match-group";
 // import {LeagueService} from "../service/league.service";
-// import * as $ from "jquery";
+import * as $ from "jquery";
 import {State} from "../modules/state";
 import {LiveEvent} from "../modules/event";
 import { Http } from '@angular/http'; // (1)
@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map'; // (2)
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit {
+  public switchIndex: string = '0';
   // datashuju:string[];
   prematch:string[];
   prematchA:string[];
@@ -31,6 +32,8 @@ export class CalculatorComponent implements OnInit {
   exception:string[];
   exceptionA:string[];
   exceptionD:string[];
+
+  yichang:boolean;
 
   info1:any;
   info2:any;
@@ -47,53 +50,28 @@ export class CalculatorComponent implements OnInit {
   info13:any;
   shuju:string[];
   //颜色的判断
-  switchIndex :string;
-  switchI:string;
-  switchIn:string;
-  switchInd:string;
+  switcha :string;
+  switchb:string;
+  switchc:string;
+  switchg:string;
+  private interval;
     constructor(private QUERY: CalcuService, private router: Router,private message: ElMessageService) {
+      
+      this.yichang=false;
       //uniCode,state
       var uniCode="";
       var state="";
       this.QUERY.getMatch().subscribe(data => {
         console.log(data,"111")
-        // console.log(uniCode,state,"369")
-        // var dest: any = this.zuhe(data);
-        // this.datashuju=data;
-
         this.close=data.close;
-        // this.closeA =data[2].close.pool[0].HAD;
-        // this.closeD =data[2].close.pool[1].HHAD;
         this.prematch =data.prematch;
-        // this.prematchA =data[0].prematch.pool[0];
-        // console.log(this.prematchA)
-        // this.prematchD =data[0].prematch.pool[1].HHAD;
         this.inplay=data.inplay;
-        // this.inplayA =data[1].inplay.pool[0].HAD;
-        // this.inplayD =data[1].inplay.pool[1].HHAD;
-        this.exception=data.exception;
-        // this.exceptionA =data[3].exception.pool[0].HAD;
-        // this.exceptionD =data[3].exception.pool[1].HHAD;
-
-        // for (var m = 0; m < data[2].close.length; m++) {
-        //   this.closeA =  data[2].close[m].pool.HAD;
-        //   this.closeD =data[2].close[m].pool.HHAD;
-        //   console.log(this.closeA,"HAD")
-        //   console.log(this.closeD,"让球")
-        // }
-        // for (var i = 0; i < data[0].prematch.length; i++) {
-        //   this.prematchA =  data[0].prematch[i].pool.HAD;
-        //   this.prematchD =data[0].prematch[i].pool.HHAD;
-        // }
-        // for (var k = 0; k < data[1].inplay.length; k++) {
-        //   this.inplayA =  data[1].inplay[k].pool.HAD;
-        //   this.inplayD =data[1].inplay[k].pool.HHAD;
-        // }
-        // for (var u = 0; u < data[3].exception.length; u++) {
-        //   this.exceptionA =  data[3].exception[u].pool.HAD;
-        //   this.exceptionD =data[3].exception[u].pool.HHAD;
-        // }
-
+        if(data.exception.length>0){
+          this.yichang=true;
+          this.exception=data.exception;
+        }else{
+          this.yichang=false;
+        }
       })
     }
 
@@ -108,9 +86,30 @@ export class CalculatorComponent implements OnInit {
 		// 	if (date.getDay() == 6) week = "周六"
 		// 	return week;
     // }
-    
-    ngOnInit() {
 
+  /**
+   * 切换TAB
+   * @param index
+   */
+  switch(index: string): void {
+    this.switchIndex = index;
+    localStorage.setItem('SWITCH_INDEX', this.switchIndex);
+  }
+    ngOnInit() {
+      this.yichang=false;
+      // this.interval = setInterval(() => {
+      //   this.QUERY.getMatch().subscribe(data => {
+      //     this.close=data.close;
+      //     this.prematch =data.prematch;
+      //     this.inplay=data.inplay;
+      //     if(data.exception.length>0){
+      //       this.yichang=true;
+      //       this.exception=data.exception;
+      //     }else{
+      //       this.yichang=false;
+      //     }
+      //   })
+      // }, 30000)
     }
 
 //     zuhe(data) {
@@ -148,15 +147,26 @@ export class CalculatorComponent implements OnInit {
 //点击赔率
   cl(name,pool,i,matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M,uniCode){
     console.log(i,name)
-    if(name=="已结束" ){   
-        this.switchIndex = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
-        
+    if(name=="已结束"){   
+        this.switcha = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+        this.switchb ="0";
+        this.switchc="0";
+        this.switchg="0";
     }else if(name=="进行中"){
-      this.switchI = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+      this.switcha="0";
+      this.switchb = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+      this.switchc="0";
+      this.switchg="0";
     }else if(name=="未开始"){
-      this.switchIn = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+      this.switcha="0";
+      this.switchb ="0";
+      this.switchc = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+      this.switchg="0";
     }else{
-      this.switchInd = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
+      this.switcha="0";
+      this.switchb ="0";
+      this.switchc="0";
+      this.switchg = pool=="HAD"? 'HAD'+M+i:'HHAD'+M+i;
     }
     console.log(name,pool,i,matchCode,homeTeam,awayTeam,H,A,X,rang,F,G,T,M,uniCode,"888")
     localStorage.setItem("info1", matchCode);

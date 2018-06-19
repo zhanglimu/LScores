@@ -44,6 +44,8 @@ i{
 .events_list .eventsvs .ac,
 .events_list .eventsvs .ad {
     float: left;
+    
+   color: #EB3B32;
     width: 33.3%;
     font-size: 12px;
      line-height: 38px; 
@@ -56,7 +58,7 @@ i{
 #invisible .eventsnum span{
    cursor: pointer;
    display: inline-block;
-   color: #fff;
+//    color: #fff;
    width: 31%;
     //  float: left;
      height: 30px;
@@ -68,16 +70,18 @@ i{
 // .active{background-color:#e85859!important;color: #000!important;}
 
 
-.eventsnum span i{font-style:normal; padding-left: 10px; font-weight: bold;}
+.eventsnum span i{font-style:normal; padding-left: 10px; font-weight: bold;color: #333}
 .eventsnum .zhuwin,
 .eventsnum .eventp,
 .eventsnum .kewin{
-   background:#666; border:none; border-radius: 5px; -webkit-border-radius: 5px;
+   background:rgb(219, 217, 217); border:none; border-radius: 5px; -webkit-border-radius: 5px;
  -moz-border-radius: 5px;
  -ms-border-radius: 5px;
+
 }
 .selected,.select,.sele,.se{
     background: #EB3B32 !important;
+    color: #fff;
 }
  div .el-collapse-item__header{
     text-indent: 20px;
@@ -88,11 +92,11 @@ i{
 #footer{
 	width: 100%;
   height: 60px;
-  color: #ccc;
+//   color: #ccc;
   position: fixed;
   left: 0;
   bottom: 0px;
-  background: #666;
+  background: #E32030;
 }
 .fa-calculator{
     float: right;
@@ -102,4 +106,25 @@ i{
 #footer span{
     margin: 7px 0 0 15px;
     font-size: 12px;
+    color: #fff;
+}
+
+
+.colored{
+    color: #fff;
+    background: #E32030 !important;
+}
+.header-bar{
+    background: #333;
+    padding: 12px 0;
+}
+.segment{
+    text-align: center;
+}
+.segment-button{
+    font-size: 16px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 5px 15px;
 }
