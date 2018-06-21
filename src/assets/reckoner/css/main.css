@@ -91,6 +91,9 @@ div#information button {
   .jia{
     margin-bottom: 20px;
   }
+  .jia b:first-of-type{
+    padding-right: 10px;
+  }
 .col-4,.col-12{
   padding: 0 !important;
 }
