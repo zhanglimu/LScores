@@ -118,8 +118,8 @@ if(mOpt==1){
 }else if(mOpt==5){
 	this.zi="X"+"["+hhadLine+"]";
 }else{
-	hhadLine = hhadLine>0 ? "-"+hhadLine : Math.abs(hhadLine)
-	this.zi="2"+"["+hhadLine+"]";
+	sixhhadLine = hhadLine>0 ? "-"+hhadLine : Math.abs(hhadLine)
+	this.zi="2"+"["+sixhhadLine+"]";
 }
 
 var play=pool;
@@ -175,7 +175,6 @@ var play=pool;
 				for (var i = 0; i < count; i++) {
 					Xtimes.push(successdata[i].timestamp);
 					shuju.push(successdata[i].price);
-				
 				}
 			}else{
 				var timestamp = "出票";
@@ -198,11 +197,11 @@ var play=pool;
 			async : false,
 			type : "GET",
 			//生产
-			url : 'http://live-service.caiex.com:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
+			// url : 'http://live-service.caiex.com:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
 			//1.5
 			// url : 'http://192.168.1.5:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
 			//云测试
-			// url : 'http://caiex-live.jingcai.trade:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
+			url : 'http://caiex-live.jingcai.trade:12320/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
 			
 			// url: 'https://private-200ab-zhanglimu.apiary-mock.com/caiexlive/calculator/getLotteryGraphic?matchCode=' +uniCode+ '&pool=' +play+ '&option=' + zi,
 			dataType : "json",
@@ -317,8 +316,8 @@ if(thisButton.id==1){
 }else if(thisButton.id==5){
 	this.zi="X"+"["+hhadLine+"]";
 }else{
-	hhadLine = hhadLine>0 ? "-"+hhadLine : Math.abs(hhadLine)
-	this.zi="2"+"["+hhadLine+"]";
+	sixhhadLine = hhadLine>0 ? "-"+hhadLine : Math.abs(hhadLine)
+	this.zi="2"+"["+sixhhadLine+"]";
 }
 if(thisButton.id==1 ||thisButton.id==2 ||thisButton.id==3){
 	this.play="HAD";
